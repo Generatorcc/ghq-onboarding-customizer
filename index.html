@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no">
+    <title>Agent CRM - Account Customizer</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CORE GHL & LAYOUT STYLES */
+        :root {
+            --primary: #37ca37;
+            --secondary: #188bf6;
+            --white: #ffffff;
+            --gray: #cbd5e0;
+            --black: #000000;
+            --kelly-green: #4CBB17;
+            --blue-gradient: linear-gradient(285deg, #00aeef 24%, #0066ff 65%);
+            --sidebar-bg: #313a4a;
+            --sidebar-text: #c6c6c6;
+            --main-bg: #F4F4F6;
+            --form-bg: #ffffff;
+            --form-header-bg: #D9D9D9;
+            --input-bg: #e8f4ff;
+            --input-text: #2c3345;
+            --headlinefont: 'Montserrat';
+            --contentfont: 'Lato';
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: var(--contentfont), sans-serif;
+            background-color: var(--main-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        h1, h2, h3, h4, h5, h6, span, button, a, p {
+            font-family: var(--headlinefont), sans-serif !important;
+        }
+
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        .page-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* HEADER */
+        .header-section {
+            padding: 10px 0;
+            background: var(--blue-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 37px;
+        }
+        .header-logo img {
+            width: 250px;
+        }
+        .header-title img {
+            width: 350px;
+            margin-left: -30px;
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px 40px;
+            gap: 25px;
+        }
+
+        /* --- LEFT SIDEBAR (NAVIGATION) --- */
+        .sidebar-nav {
+            flex: 0 0 18.6%;
+            background-color: var(--sidebar-bg);
+            border-radius: 15px;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-self: flex-start;
+            box-shadow: 0 0 3px 0 #7070706b;
+        }
+
+        .sidebar-nav .nav-button {
+            background-color: transparent;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            padding: 15px 10px;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-nav .nav-button .button-icon {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-nav .nav-button:hover {
+            background: var(--kelly-green) !important;
+            color: var(--white) !important;
+        }
+
+        .sidebar-nav .nav-button.active {
+            background: var(--blue-gradient) !important;
+            color: var(--white) !important;
+        }
+
+        /* --- RIGHT CONTENT PANE (FORMS) --- */
+        .form-pane {
+            flex-grow: 1;
+            background-color: var(--form-bg);
+            border: 1px solid var(--sidebar-text);
+            border-radius: 15px;
+            box-shadow: 0 0 3px 0 #7070706b;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-pane-header {
+            font-family: var(--headlinefont);
+            background-color: var(--form-header-bg);
+            color: var(--black);
+            font-weight: 400;
+            padding: 10px 0;
+            text-shadow: none;
+            border-bottom: 1px solid var(--sidebar-text);
+            line-height: 1.3em;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .form-pane-header h2 {
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .form-content-wrapper {
+            padding: 20px 30px;
+            flex-grow: 1;
+        }
+        
+        .form-container {
+            display: none; /* Hidden by default */
+        }
+        .form-container.active {
+            display: block; /* Shown when active */
+        }
+
+        /* FORM STYLING */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+        .form-field label {
+            color: var(--input-text);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .form-field input[type="text"],
+        .form-field input[type="email"],
+        .form-field input[type="url"],
+        .form-field input[type="tel"],
+        .form-field input[type="number"],
+        .form-field textarea,
+        .form-field .color-picker,
+        .form-field .file-upload {
+            background-color: var(--input-bg) !important;
+            color: var(--input-text) !important;
+            border: 0px solid #ACACACFF !important;
+            border-radius: 5px !important;
+            padding: 8px 15px !important;
+            box-shadow: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            width: 100%;
+        }
+        
+        .form-field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-field .file-upload {
+            border: 2px dashed #ccc !important;
+            background: #f9f9f9 !important;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .form-field .color-picker {
+             height: 40px;
+             cursor: pointer;
+        }
+
+        .form-field .range-slider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-field .range-slider span {
+            font-size: 14px;
+        }
+
+        .form-field .short-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* PROGRESS BAR */
+        .progress-bar-wrapper {
+            padding: 0 10%;
+            margin-top: 20px;
+        }
+        .progress-outer {
+            background-color: var(--gray);
+            border-radius: 100px;
+            height: 25px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .progress-inner {
+            background: var(--blue-gradient);
+            height: 100%;
+            width: 0%; /* JS will control this */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            transition: width 0.4s ease-in-out;
+        }
+
+        /* NEXT/SUBMIT BUTTON */
+        .submit-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .submit-button {
+            background: var(--blue-gradient);
+            border: none;
+            border-radius: 5px;
+            padding: 12px 50px;
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: auto;
+        }
+        
+        /* FOOTER */
+        .footer-section {
+            padding: 20px 0;
+            background: var(--blue-gradient);
+            color: white;
+            text-align: center;
+        }
+        .footer-logo {
+            width: 250px;
+            margin-bottom: 15px;
+        }
+        .footer-section h2 {
+            font-size: 18px;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        @media screen and (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+                align-self: initial;
+            }
+            .nav-button {
+                flex-grow: 1;
+                min-width: 150px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <main class="main-content">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar-nav">
+                <button class="nav-button active" data-step="1"><i class="fas fa-briefcase button-icon"></i> Business Info</button>
+                <button class="nav-button" data-step="2"><i class="fas fa-user-tie button-icon"></i> Personal Info</button>
+                <button class="nav-button" data-step="3"><i class="fas fa-palette button-icon"></i> Branding</button>
+                <button class="nav-button" data-step="4"><i class="fas fa-share-alt button-icon"></i> Social Media</button>
+                <button class="nav-button" data-step="5"><i class="fas fa-quote-left button-icon"></i> Testimonials</button>
+                <button class="nav-button" data-step="6"><i class="fas fa-chart-line button-icon"></i> Experience</button>
+                <button class="nav-button" data-step="7"><i class="fas fa-calendar-alt button-icon"></i> Calendar</button>
+            </nav>
+
+            <!-- Form Content Pane -->
+            <div class="form-pane">
+                <div class="form-pane-header">
+                    <h2 id="form-title">Step 1: Business Info</h2>
+                </div>
+
+                <div class="form-content-wrapper">
+                    <!-- Step 1: Business Info -->
+                    <div id="form-step-1" class="form-container active">
+                        <form>
+                            <div class="form-grid">
+                                <div class="form-field full-width">
+                                    <label for="business_name">Business Name</label>
+                                    <input type="text" id="business_name" name="business_name" placeholder="Your Company LLC">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="business_address">Business Address</label>
+                                    <input type="text" id="business_address" name="business_address" placeholder="123 Main St, Anytown, USA">
+                                </div>
+                                <div class="form-field">
+                                    <label for="business_email">Business Email</label>
+                                    <input type="email" id="business_email" name="business_email" placeholder="contact@yourcompany.com">
+                                </div>
+                                <div class="form-field">
+                                    <label for="business_phone">Business Phone Number</label>
+                                    <input type="tel" id="business_phone" name="business_phone" placeholder="(555) 123-4567">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="business_domain">Business Domain</label>
+                                    <input type="url" id="business_domain" name="business_domain" placeholder="https://www.yourcompany.com">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 2: Personal Info -->
+                    <div id="form-step-2" class="form-container">
+                        <form>
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="owner_name">Owner's Full Name</label>
+                                    <input type="text" id="owner_name" name="owner_name" placeholder="John Doe">
+                                </div>
+                                <div class="form-field">
+                                    <label for="owner_designation">Owner's Designation</label>
+                                    <input type="text" id="owner_designation" name="owner_designation" placeholder="CEO / Founder">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="owner_bio">Owner's Bio</label>
+                                    <textarea id="owner_bio" name="owner_bio" placeholder="A short biography..."></textarea>
+                                </div>
+                                <div class="form-field">
+                                    <label for="owner_profile_pic">Owner's Profile Picture</label>
+                                    <input type="file" id="owner_profile_pic" name="owner_profile_pic" class="file-upload">
+                                </div>
+                                <div class="form-field">
+                                    <label for="agent_signature">Agent Signature (Image)</label>
+                                    <input type="file" id="agent_signature" name="agent_signature" class="file-upload">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="npn">National Producer Number (NPN)</label>
+                                    <input type="number" id="npn" name="npn" placeholder="12345678">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 3: Branding -->
+                    <div id="form-step-3" class="form-container">
+                        <form>
+                           <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="brand_color_main">Brand Color (Main)</label>
+                                    <input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#0066ff">
+                                </div>
+                                <div class="form-field">
+                                    <label for="brand_color_cta">Brand Color (Call to Action)</label>
+                                    <input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17">
+                                </div>
+                                <div class="form-field">
+                                    <label for="logo_rectangular">Business Logo (Rectangular)</label>
+                                    <input type="file" id="logo_rectangular" name="logo_rectangular" class="file-upload">
+                                </div>
+                                <div class="form-field">
+                                    <label for="logo_square">Business Logo (Square)</label>
+                                    <input type="file" id="logo_square" name="logo_square" class="file-upload">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="favicon">Favicon (.ico file)</label>
+                                    <input type="file" id="favicon" name="favicon" class="file-upload">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Step 4: Social Media -->
+                    <div id="form-step-4" class="form-container">
+                        <form>
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="social_facebook">Facebook URL</label>
+                                    <input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage">
+                                </div>
+                                <div class="form-field">
+                                    <label for="social_instagram">Instagram URL</label>
+                                    <input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle">
+                                </div>
+                                 <div class="form-field">
+                                    <label for="social_twitter">X (Twitter) URL</label>
+                                    <input type="url" id="social_twitter" name="social_twitter" placeholder="https://x.com/yourhandle">
+                                </div>
+                                <div class="form-field">
+                                    <label for="social_linkedin">LinkedIn URL</label>
+                                    <input type="url" id="social_linkedin" name="social_linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                                </div>
+                                <div class="form-field">
+                                    <label for="social_tiktok">TikTok URL</label>
+                                    <input type="url" id="social_tiktok" name="social_tiktok" placeholder="https://tiktok.com/@yourhandle">
+                                </div>
+                                <div class="form-field">
+                                    <label for="social_youtube">YouTube URL</label>
+                                    <input type="url" id="social_youtube" name="social_youtube" placeholder="https://youtube.com/yourchannel">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 5: Testimonials -->
+                    <div id="form-step-5" class="form-container">
+                        <form>
+                            <h4>Testimonial 1</h4>
+                            <div class="form-grid">
+                                <div class="form-field"><label>Client Name</label><input type="text" placeholder="Jane Smith"></div>
+                                <div class="form-field"><label>Client Picture</label><input type="file" class="file-upload"></div>
+                                <div class="form-field full-width"><label>Statement</label><textarea placeholder="This company is fantastic!"></textarea></div>
+                            </div>
+                            <hr>
+                            <h4>Testimonial 2</h4>
+                             <div class="form-grid">
+                                <div class="form-field"><label>Client Name</label><input type="text" placeholder="Mark Johnson"></div>
+                                <div class="form-field"><label>Client Picture</label><input type="file" class="file-upload"></div>
+                                <div class="form-field full-width"><label>Statement</label><textarea placeholder="I couldn't be happier with the results."></textarea></div>
+                            </div>
+                            <hr>
+                            <h4>Testimonial 3</h4>
+                             <div class="form-grid">
+                                <div class="form-field"><label>Client Name</label><input type="text" placeholder="Emily White"></div>
+                                <div class="form-field"><label>Client Picture</label><input type="file" class="file-upload"></div>
+                                <div class="form-field full-width"><label>Statement</label><textarea placeholder="Five stars! Highly recommend."></textarea></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 6: Experience -->
+                    <div id="form-step-6" class="form-container">
+                        <form>
+                            <div class="form-grid">
+                                <div class="form-field full-width">
+                                    <label for="top_products">Top 3 Products / Services</label>
+                                    <textarea id="top_products" name="top_products" placeholder="e.g., Life Insurance, Financial Planning, Retirement Solutions"></textarea>
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="price_range">Price Range</label>
+                                    <div class="range-slider">
+                                        <span>$</span> <input type="number" id="price_range_min" placeholder="100"> 
+                                        <span>to</span>
+                                        <span>$</span> <input type="number" id="price_range_max" placeholder="5000">
+                                    </div>
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="years_experience">Years of Experience</label>
+                                    <input type="number" id="years_experience" name="years_experience" placeholder="10">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 7: Calendar -->
+                    <div id="form-step-7" class="form-container">
+                        <form>
+                            <div class="form-field full-width">
+                                <label for="calendar_integration">Calendar Integration Link</label>
+                                <input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here">
+                                <span class="short-label">This link will be used to allow clients to book appointments with you.</span>
+                            </div>
+                            <div class="full-width" style="text-align:center; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
+                                <p>To connect your calendar for automated booking, please go to the 'Integrations' section of your account settings after completing this setup.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="progress-bar-wrapper">
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
+                    </div>
+                </div>
+
+                <div class="submit-button-container">
+                     <button class="submit-button">Save & Continue</button>
+                </div>
+                <div style="height: 20px;"></div>
+
+            </div>
+        </main>
+    </div>
+    
+    <footer class="footer-section">
+        <img src="https://assets.cdn.filesafe.space/6U7lgWZQt8gh6UtP5hTT/media/65dbf7b8de43c932c31f8f19.png" alt="Footer Logo" class="footer-logo">
+        <h2> © Copyright Agent CRM Support 2024</h2>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navButtons = document.querySelectorAll('.nav-button');
+        const formContainers = document.querySelectorAll('.form-container');
+        const formTitle = document.getElementById('form-title');
+        const progressBar = document.getElementById('progress-bar');
+        
+        const stepTitles = [
+            "Step 1: Business Info",
+            "Step 2: Personal Info",
+            "Step 3: Branding",
+            "Step 4: Social Media",
+            "Step 5: Testimonials",
+            "Step 6: Experience",
+            "Step 7: Calendar Setup"
+        ];
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const step = this.getAttribute('data-step');
+
+                // Update active button
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                // Show correct form
+                formContainers.forEach(form => {
+                    if (form.id === `form-step-${step}`) {
+                        form.classList.add('active');
+                    } else {
+                        form.classList.remove('active');
+                    }
+                });
+                
+                // Update form title
+                formTitle.textContent = stepTitles[step - 1];
+
+                // Update progress bar
+                const progressPercentage = (step / 7) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
