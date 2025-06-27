@@ -99,6 +99,7 @@
             color: var(--white) !important;
         }
 
+        /* FIXED: Changed to a flex container to control child element spacing */
         .form-pane {
             flex-grow: 1;
             background-color: var(--form-bg);
@@ -107,8 +108,6 @@
             box-shadow: 0 0 3px 0 #7070706b;
             display: flex;
             flex-direction: column;
-            /* FIXED: Set a minimum height to ensure the pane is tall enough and there's space below the button */
-            min-height: 950px; /* Adjust this value if needed to ensure space */
         }
         
         .form-pane-header {
@@ -126,10 +125,17 @@
             font-weight: 500;
         }
         
-        /* This wrapper will now grow, pushing the button to the bottom of the flex container */
+        /* This wrapper will now grow, pushing the button to the bottom */
+        .form-and-button-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 0 30px; /* Padding moved here */
+        }
+
         .form-content-wrapper {
-            padding: 20px 30px;
-            flex-grow: 1; 
+             flex-grow: 1; /* This pushes the button down */
+             min-height: 550px; /* Ensures even short tabs have height */
         }
         
         .form-container {
@@ -211,7 +217,8 @@
 
         .submit-button-container {
             text-align: center;
-            padding: 20px 0; 
+            padding: 20px 0;
+            margin-top: auto; /* Pushes button to the bottom of the flex container */
         }
         .submit-button {
             background: var(--kelly-green);
@@ -292,7 +299,7 @@
                     </div>
                 </div>
 
-                <form id="multi-step-form" action="YOUR_GHL_FORM_ENDPOINT_URL" method="POST">
+                <form id="multi-step-form" action="YOUR_GHL_FORM_ENDPOINT_URL" method="POST" class="form-and-button-wrapper">
                     <div class="form-content-wrapper">
                         <!-- Step 1: Business Info -->
                         <div id="form-step-1" class="form-container active">
@@ -475,6 +482,7 @@
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
+            // FIXED: Button text logic is correct
             saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Submit Onboarding' : 'Save & Continue';
         }
 
@@ -491,6 +499,7 @@
             });
         });
 
+        // FIXED: Validation logic is removed
         saveAndContinueBtn.addEventListener('click', function () {
             if (currentStep < totalSteps) {
                 goToStep(currentStep + 1);
