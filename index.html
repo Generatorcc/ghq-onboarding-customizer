@@ -226,11 +226,10 @@
         }
 
         /* ACTIONS AREA (BUTTON & PROGRESS BAR) */
-        .form-actions-container {
-            margin-top: 30px; /* CHANGED: Reduced spacing */
-        }
         .submit-button-container {
             text-align: center;
+            margin-top: 40px;      /* FIXED: Re-added space between form and button */
+            padding-bottom: 25px; /* Added space at the very bottom */
         }
         .submit-button {
             background: var(--kelly-green);
@@ -246,7 +245,7 @@
 
         /* PROGRESS BAR STYLES */
         .progress-bar-wrapper {
-            padding: 15px 10% 0; /* CHANGED: Moved padding here */
+            padding: 15px 10% 0; 
         }
         .progress-outer {
             background-color: var(--gray);
@@ -310,7 +309,7 @@
                     <h2 id="form-title">Step 1: Business Info</h2>
                 </div>
 
-                <!-- MOVED: Progress bar is now at the top of the form area -->
+                <!-- FIXED: Progress bar is now at the top of the form area -->
                 <div class="progress-bar-wrapper">
                     <div class="progress-outer">
                         <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
@@ -425,15 +424,12 @@
                             <div class="full-width" style="text-align:center; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;"><p>To connect your calendar for automated booking, please go to the 'Integrations' section of your account settings after completing this setup.</p></div>
                         </form>
                     </div>
-                </div>
 
-                <div class="form-actions-container">
+                    <!-- Actions container is now just for the button -->
                     <div class="submit-button-container">
                          <button class="submit-button">Save & Continue</button>
                     </div>
                 </div>
-                <div style="height: 20px;"></div>
-
             </div>
         </main>
     </div>
