@@ -320,7 +320,6 @@
                                 <div class="form-field"><label for="contact_email">Email Address</label><input type="email" id="contact_email" name="contact.email" placeholder="john.doe@email.com" required></div>
                                 <div class="form-field"><label for="contact_phone">Phone Number</label><input type="tel" id="contact_phone" name="contact.phone" placeholder="(555) 867-5309" required></div>
                                 <div class="form-field"><label for="contact_dob">Date of Birth</label><input type="date" id="contact_dob" name="contact.date_of_birth" required></div>
-                                <!-- ADDITION: Profile Picture Upload -->
                                 <div class="form-field"><label for="profile_pic">Profile Picture</label><input type="file" id="profile_pic" name="profile_pic" class="file-upload" required></div>
 
                                 <h4 class="full-width">Physical Address</h4>
@@ -341,8 +340,7 @@
                                 <div class="form-field full-width"><label for="logo_primary">Primary Logo (Rectangular)</label><input type="file" id="logo_primary" name="logo_primary" class="file-upload" required></div>
                                 <div class="form-field full-width"><label for="logo_secondary">Secondary Logo (Square/Icon)</label><input type="file" id="logo_secondary" name="logo_secondary" class="file-upload" required></div>
                                 <div class="form-field full-width"><label for="favicon">Favicon (.ico, .png)</label><input type="file" id="favicon" name="favicon" class="file-upload" required></div>
-                                <!-- ADDITION: General Media Upload -->
-                                <div class="form-field full-width"><label for="media_upload">Upload Media (Images, PDFs, etc.)</label><input type="file" id="media_upload" name="media_upload[]" class="file-upload" multiple></div>
+                                <div class="form-field full-width"><label for="media_upload">Upload General Media (Images, PDFs, etc.)</label><input type="file" id="media_upload" name="media_upload[]" class="file-upload" multiple></div>
                             </div>
                         </div>
                         
@@ -441,7 +439,7 @@
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
-            saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Finish' : 'Save & Continue';
+            saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Finish' : 'Submit Onboarding';
         }
 
         function goToStep(stepNumber) {
@@ -474,7 +472,8 @@
                     goToStep(currentStep + 1);
                 } else {
                     alert('Onboarding Complete! Submitting your information.');
-                    // To make this form functional, you would replace the alert with:
+                    // For a real submission, you would have an endpoint URL in the form's action attribute.
+                    // The line below would then submit the form data to GHL.
                     // mainForm.submit(); 
                 }
             }
