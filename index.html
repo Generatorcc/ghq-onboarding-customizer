@@ -125,7 +125,6 @@
             font-weight: 400;
         }
         
-        /* FIXED: Wrapper no longer uses flex-grow */
         .form-content-wrapper {
             padding: 20px 30px;
         }
@@ -150,6 +149,9 @@
             flex-direction: column;
             margin-bottom: 16px;
         }
+        .form-field.hidden {
+            display: none;
+        }
         .form-field label {
             color: var(--input-text);
             font-size: 14px;
@@ -160,6 +162,7 @@
         .form-field input[type="email"],
         .form-field input[type="url"],
         .form-field input[type="tel"],
+        .form-field input[type="date"],
         .form-field input[type="number"],
         .form-field select,
         .form-field textarea,
@@ -197,8 +200,8 @@
 
         .submit-button-container {
             text-align: center;
-            margin-top: 40px;      /* Spacing between last form field and button */
-            padding-bottom: 25px; /* Spacing at the very bottom of the pane */
+            margin-top: 40px;
+            padding-bottom: 25px;
         }
         .submit-button {
             background: var(--kelly-green);
@@ -273,7 +276,6 @@
                     <h2 id="form-title">Step 1: Business Info</h2>
                 </div>
 
-                <!-- FIXED: Progress bar is now at the top -->
                 <div class="progress-bar-wrapper">
                     <div class="progress-outer">
                         <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
@@ -281,10 +283,8 @@
                 </div>
 
                 <div class="form-content-wrapper">
-                    <!-- Form steps will be injected here by JS -->
                     <div id="form-step-1" class="form-container active">
                         <form>
-                            <!-- Form content for Step 1 -->
                             <div class="form-grid">
                                 <div class="form-field full-width"><label for="location_name">Business Name</label><input type="text" id="location_name" name="location_name" placeholder="Your Company LLC"></div>
                                 <div class="form-field"><label for="location_email">Business Email</label><input type="email" id="location_email" name="location_email" placeholder="contact@yourcompany.com"></div>
@@ -294,25 +294,77 @@
                         </form>
                     </div>
 
+                    <!-- FIXED: Personal Info section has been rebuilt -->
                     <div id="form-step-2" class="form-container">
                         <form>
-                            <!-- Form content for Step 2 -->
                              <div class="form-grid">
-                                <div class="form-field"><label for="contact_first_name">Owner's First Name</label><input type="text" id="contact_first_name" name="contact.first_name" placeholder="John"></div>
-                                <div class="form-field"><label for="contact_last_name">Owner's Last Name</label><input type="text" id="contact_last_name" name="contact.last_name" placeholder="Doe"></div>
-                                <div class="form-field full-width"><label for="owner_designation">Owner's Designation</label><input type="text" id="owner_designation" name="owner_designation" placeholder="CEO / Founder"></div>
+                                <div class="form-field"><label for="contact_first_name">First Name</label><input type="text" id="contact_first_name" name="contact.first_name" placeholder="John"></div>
+                                <div class="form-field"><label for="contact_last_name">Last Name</label><input type="text" id="contact_last_name" name="contact.last_name" placeholder="Doe"></div>
+                                <div class="form-field"><label for="contact_email">Email Address</label><input type="email" id="contact_email" name="contact.email" placeholder="john.doe@email.com"></div>
+                                <div class="form-field"><label for="contact_phone">Phone Number</label><input type="tel" id="contact_phone" name="contact.phone" placeholder="(555) 867-5309"></div>
+                                <div class="form-field"><label for="contact_dob">Date of Birth</label><input type="date" id="contact_dob" name="contact.date_of_birth"></div>
+                                <div class="form-field"><label for="contact_pref">Preferred Contact Method</label>
+                                    <select id="contact_pref" name="preferred_contact_method">
+                                        <option value="email">Email</option>
+                                        <option value="phone">Phone Call</option>
+                                        <option value="sms">Text Message (SMS)</option>
+                                    </select>
+                                </div>
+                                <div class="form-field full-width"><label for="contact_timezone">Time Zone</label><input type="text" id="contact_timezone" name="contact.timezone" placeholder="America/New_York"></div>
+                                <div class="form-field hidden"><input type="hidden" name="contact.source" value="Onboarding Form"></div>
                             </div>
                         </form>
                     </div>
 
-                    <!-- Add other form steps similarly -->
-                    <div id="form-step-3" class="form-container"> <form><p>Branding Form Content</p></form> </div>
-                    <div id="form-step-4" class="form-container"> <form><p>Social Media Form Content</p></form> </div>
-                    <div id="form-step-5" class="form-container"> <form><p>Testimonials Form Content</p></form> </div>
-                    <div id="form-step-6" class="form-container"> <form><p>Experience Form Content</p></form> </div>
-                    <div id="form-step-7" class="form-container"> <form><p>Calendar Form Content</p></form> </div>
+                    <div id="form-step-3" class="form-container">
+                        <form>
+                           <div class="form-grid">
+                                <div class="form-field"><label for="brand_color_main">Brand Color (Main)</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#0066ff"></div>
+                                <div class="form-field"><label for="brand_color_cta">Brand Color (Call to Action)</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
+                                <div class="form-field"><label for="logo_rectangular">Business Logo (Rectangular)</label><input type="file" id="logo_rectangular" name="logo_rectangular" class="file-upload"></div>
+                                <div class="form-field"><label for="logo_square">Business Logo (Square)</label><input type="file" id="logo_square" name="logo_square" class="file-upload"></div>
+                                <div class="form-field full-width"><label for="favicon">Favicon (.ico file)</label><input type="file" id="favicon" name="favicon" class="file-upload"></div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div id="form-step-4" class="form-container">
+                        <form>
+                            <div class="form-grid">
+                                <div class="form-field"><label for="social_facebook">Facebook URL</label><input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage"></div>
+                                <div class="form-field"><label for="social_instagram">Instagram URL</label><input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle"></div>
+                                <div class="form-field"><label for="social_twitter">X (Twitter) URL</label><input type="url" id="social_twitter" name="social_twitter" placeholder="https://x.com/yourhandle"></div>
+                                <div class="form-field"><label for="social_linkedin">LinkedIn URL</label><input type="url" id="social_linkedin" name="social_linkedin" placeholder="https://linkedin.com/in/yourprofile"></div>
+                            </div>
+                        </form>
+                    </div>
 
-                    <!-- FIXED: Button is now directly after the form content -->
+                    <div id="form-step-5" class="form-container">
+                        <form>
+                            <h4>Testimonial 1</h4>
+                            <div class="form-grid">
+                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_1_name" placeholder="Jane Smith"></div>
+                                <div class="form-field"><label>Client Picture</label><input type="file" name="testimonial_1_pic" class="file-upload"></div>
+                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="form-step-6" class="form-container">
+                        <form>
+                            <div class="form-grid">
+                                <div class="form-field full-width"><label for="top_products">Top 3 Products / Services</label><textarea id="top_products" name="top_products" placeholder="e.g., Life Insurance, Financial Planning, Retirement Solutions"></textarea></div>
+                                <div class="form-field full-width"><label for="years_experience">Years of Experience</label><input type="number" id="years_experience" name="years_experience" placeholder="10"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="form-step-7" class="form-container">
+                        <form>
+                            <div class="form-field full-width"><label for="calendar_integration">Calendar Integration Link</label><input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here"></div>
+                        </form>
+                    </div>
+
                     <div class="submit-button-container">
                          <button class="submit-button">Save & Continue</button>
                     </div>
