@@ -99,7 +99,6 @@
             color: var(--white) !important;
         }
 
-        /* The form pane is now a flex container that will hold the content and the button at the bottom */
         .form-pane {
             flex-grow: 1;
             background-color: var(--form-bg);
@@ -108,6 +107,8 @@
             box-shadow: 0 0 3px 0 #7070706b;
             display: flex;
             flex-direction: column;
+            /* FIXED: Set a minimum height to ensure the pane is tall enough */
+            min-height: 800px; /* Adjust this value if needed */
         }
         
         .form-pane-header {
@@ -125,10 +126,10 @@
             font-weight: 500;
         }
         
-        /* FIXED: This wrapper now grows and pushes the button to the bottom */
+        /* FIXED: This wrapper now grows to fill the space in the flex container */
         .form-content-wrapper {
             padding: 20px 30px;
-            flex-grow: 1; 
+            flex-grow: 1;
         }
         
         .form-container {
@@ -161,6 +162,14 @@
             font-weight: 500;
             margin-bottom: 5px;
         }
+        /* ADDED: Helper text for image sizes */
+        .form-field .helper-text {
+            font-size: 12px;
+            color: #777;
+            margin-top: -3px;
+            margin-bottom: 5px;
+        }
+
         .form-field input[type="text"],
         .form-field input[type="email"],
         .form-field input[type="url"],
@@ -203,7 +212,7 @@
 
         .submit-button-container {
             text-align: center;
-            padding: 20px 0; /* Consistent padding around the button */
+            padding: 20px 0; /* Changed from margin-top to padding for better layout control */
         }
         .submit-button {
             background: var(--kelly-green);
@@ -288,16 +297,106 @@
                     <div class="form-content-wrapper">
                         <!-- Step 1: Business Info -->
                         <div id="form-step-1" class="form-container active">
-                           <!-- All business info fields go here -->
+                            <!-- Business Info content -->
                         </div>
 
-                        <!-- Other form steps -->
+                        <!-- Step 2: Personal Info -->
                         <div id="form-step-2" class="form-container">
-                            <!-- All personal info fields go here -->
+                            <div class="form-grid two-col">
+                                <div class="form-field"><label for="contact_first_name">First Name</label><input type="text" id="contact_first_name" name="contact.first_name" placeholder="John"></div>
+                                <div class="form-field"><label for="contact_last_name">Last Name</label><input type="text" id="contact_last_name" name="contact.last_name" placeholder="Doe"></div>
+                                <div class="form-field"><label for="contact_email">Email Address</label><input type="email" id="contact_email" name="contact.email" placeholder="john.doe@email.com"></div>
+                                <div class="form-field"><label for="contact_phone">Phone Number</label><input type="tel" id="contact_phone" name="contact.phone" placeholder="(555) 867-5309"></div>
+                                <div class="form-field"><label for="contact_dob">Date of Birth</label><input type="date" id="contact_dob" name="contact.date_of_birth"></div>
+                                <div class="form-field">
+                                    <label for="profile_pic">Profile Picture</label>
+                                    <span class="helper-text">(Suggested: 200px by 200px)</span>
+                                    <input type="file" id="profile_pic" name="profile_pic" class="file-upload">
+                                </div>
+                                <h4 class="full-width">Physical Address</h4>
+                                <!-- address fields... -->
+                            </div>
                         </div>
-                        <!-- ... all other form steps ... -->
+
+                        <!-- Step 3: Branding -->
+                        <div id="form-step-3" class="form-container">
+                           <div class="form-grid">
+                                <div class="form-field"><label for="brand_color_main">Primary Color</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#006511"></div>
+                                <div class="form-field"><label for="brand_color_cta">Secondary Color</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
+                                <div class="form-field"><label for="brand_color_tertiary">Tertiary Color</label><input type="color" id="brand_color_tertiary" name="brand_color_tertiary" class="color-picker" value="#D9D9D9"></div>
+                                <div class="form-field full-width">
+                                    <label for="logo_primary">Primary Logo (Rectangular)</label>
+                                    <span class="helper-text">(e.g., 400px by 100px)</span>
+                                    <input type="file" id="logo_primary" name="logo_primary" class="file-upload">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="logo_secondary">Secondary Logo (Square/Icon)</label>
+                                    <span class="helper-text">(e.g., 200px by 200px)</span>
+                                    <input type="file" id="logo_secondary" name="logo_secondary" class="file-upload">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="favicon">Favicon</label>
+                                    <span class="helper-text">(e.g., 32px by 32px, .ico or .png)</span>
+                                    <input type="file" id="favicon" name="favicon" class="file-upload">
+                                </div>
+                                <div class="form-field full-width">
+                                    <label for="media_upload">Upload General Media (Images, PDFs, etc.)</label>
+                                    <input type="file" id="media_upload" name="media_upload[]" class="file-upload" multiple>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: Social Media -->
+                        <div id="form-step-4" class="form-container">
+                            <!-- Social media content -->
+                        </div>
+
+                        <!-- Step 5: Testimonials -->
+                        <div id="form-step-5" class="form-container">
+                            <h4>Testimonial 1</h4>
+                            <div class="form-grid two-col">
+                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_1_name" placeholder="Jane Smith"></div>
+                                <div class="form-field">
+                                    <label>Client Picture</label>
+                                    <span class="helper-text">(e.g., 200px by 200px)</span>
+                                    <input type="file" name="testimonial_1_pic" class="file-upload">
+                                </div>
+                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
+                            </div>
+                            <hr>
+                            <h4>Testimonial 2</h4>
+                            <div class="form-grid two-col">
+                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_2_name" placeholder="Mark Johnson"></div>
+                                <div class="form-field">
+                                    <label>Client Picture</label>
+                                    <span class="helper-text">(e.g., 200px by 200px)</span>
+                                    <input type="file" name="testimonial_2_pic" class="file-upload">
+                                </div>
+                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_2_statement" placeholder="I couldn't be happier with the results."></textarea></div>
+                            </div>
+                            <hr>
+                            <h4>Testimonial 3</h4>
+                            <div class="form-grid two-col">
+                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_3_name" placeholder="Emily White"></div>
+                                <div class="form-field">
+                                    <label>Client Picture</label>
+                                    <span class="helper-text">(e.g., 200px by 200px)</span>
+                                    <input type="file" name="testimonial_3_pic" class="file-upload">
+                                </div>
+                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_3_statement" placeholder="Five stars! Highly recommend."></textarea></div>
+                            </div>
+                        </div>
+
+                        <!-- Step 6 and 7 -->
+                        <div id="form-step-6" class="form-container">
+                            <!-- Experience content -->
+                        </div>
+                        <div id="form-step-7" class="form-container">
+                           <!-- Calendar content -->
+                        </div>
                     </div>
 
+                    <!-- Button is now outside the content wrapper but inside the form -->
                     <div class="submit-button-container">
                          <button type="button" class="submit-button" id="save-and-continue-btn">Save & Continue</button>
                     </div>
@@ -338,6 +437,7 @@
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
+            // FIXED: Button text logic
             saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Submit Onboarding' : 'Save & Continue';
         }
 
@@ -354,6 +454,7 @@
             });
         });
 
+        // FIXED: Removed validation logic
         saveAndContinueBtn.addEventListener('click', function () {
             if (currentStep < totalSteps) {
                 goToStep(currentStep + 1);
