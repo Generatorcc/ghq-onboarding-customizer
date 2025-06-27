@@ -137,7 +137,7 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Changed for more flexible branding layout */
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
         .form-grid.two-col {
@@ -201,7 +201,7 @@
         .submit-button-container {
             text-align: center;
             margin-top: 40px;
-            padding-bottom: 25px; /* FIXED: Removed extra padding from parent container */
+            padding-bottom: 25px;
         }
         .submit-button {
             background: var(--kelly-green);
@@ -283,7 +283,7 @@
                 </div>
 
                 <!-- A single form tag now wraps all the steps for validation -->
-                <form id="multi-step-form">
+                <form id="multi-step-form" action="YOUR_GHL_FORM_ENDPOINT_URL" method="POST">
                     <div class="form-content-wrapper">
                         <!-- Step 1: Business Info -->
                         <div id="form-step-1" class="form-container active">
@@ -308,7 +308,7 @@
                                 <h4 class="full-width">Legal & Industry</h4>
                                 <div class="form-field"><label for="ein">EIN or Tax ID</label><input type="text" id="ein" name="ein" placeholder="XX-XXXXXXX"></div>
                                 <div class="form-field"><label for="company_registration_number">Company Registration Number</label><input type="text" id="company_registration_number" name="company_registration_number" placeholder="Optional"></div>
-                                <div class="form-field"><label for="industry">Industry</label><input type="text" id="industry" name="industry" placeholder="e.g., Insurance" required></div>
+                                <div class="form-field"><label for="industry">Industry</label><input type="text" id="industry" name="industry" placeholder="e.g., Insurance, Financial Services" required></div>
                             </div>
                         </div>
 
@@ -409,67 +409,64 @@
         let currentStep = 1;
 
         function updateUI() {
-            // Update active sidebar button
             navButtons.forEach(btn => {
                 btn.classList.toggle('active', parseInt(btn.dataset.step) === currentStep);
             });
 
-            // Show the correct form container
             formContainers.forEach(form => {
                 form.classList.toggle('active', parseInt(form.id.split('-')[2]) === currentStep);
             });
             
-            // Update title and progress bar
             formTitle.textContent = stepTitles[currentStep - 1];
             const progressPercentage = (currentStep / totalSteps) * 100;
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
-            // Update button text
-            if (currentStep === totalSteps) {
-                saveAndContinueBtn.textContent = 'Finish';
-            } else {
-                saveAndContinueBtn.textContent = 'Save & Continue';
-            }
+            saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Finish' : 'Save & Continue';
         }
 
-        // Sidebar navigation
+        function goToStep(stepNumber) {
+            currentStep = stepNumber;
+            updateUI();
+        }
+
         navButtons.forEach(button => {
             button.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent default button behavior
-                currentStep = parseInt(this.dataset.step);
-                updateUI();
+                e.preventDefault();
+                goToStep(parseInt(this.dataset.step));
             });
         });
 
-        // "Save & Continue" button logic
         saveAndContinueBtn.addEventListener('click', function () {
             const activeFormContainer = document.querySelector('.form-container.active');
             const inputs = activeFormContainer.querySelectorAll('input[required], select[required], textarea[required]');
             let allValid = true;
 
-            inputs.forEach(input => {
+            for (const input of inputs) {
                 if (!input.checkValidity()) {
-                    // Trigger browser's native validation UI
-                    mainForm.reportValidity();
+                    // Find the parent form to report validity on
+                    const parentForm = input.closest('form');
+                    if (parentForm) {
+                        // This triggers the browser's validation UI for the specific invalid field
+                        parentForm.reportValidity(); 
+                    }
                     allValid = false;
+                    break; 
                 }
-            });
+            }
 
             if (allValid) {
                 if (currentStep < totalSteps) {
-                    currentStep++;
-                    updateUI();
+                    goToStep(currentStep + 1);
                 } else {
-                    // Last step - handle final submission
                     alert('Onboarding Complete! Submitting your information.');
-                    // In a real scenario, you would uncomment the line below
+                    // IMPORTANT: For a real submission, you would have an endpoint URL in the form's action attribute.
+                    // The line below would then submit the form data to GHL.
                     // mainForm.submit(); 
                 }
             }
         });
         
-        // Initialize the view
         updateUI();
     });
 </script>
