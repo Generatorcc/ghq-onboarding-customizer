@@ -110,8 +110,8 @@
         }
         
         .form-pane-header {
-            background-color: var(--dark-green-active); /* FIXED: Set to dark green */
-            color: var(--white); /* FIXED: Set text to white for contrast */
+            background-color: var(--dark-green-active);
+            color: var(--white);
             padding: 10px 0;
             text-align: center;
             border-radius: 15px 15px 0 0;
@@ -148,9 +148,7 @@
             flex-direction: column;
             margin-bottom: 16px;
         }
-        .form-field.hidden {
-            display: none;
-        }
+        
         .form-field label {
             color: var(--input-text);
             font-size: 14px;
@@ -179,24 +177,6 @@
             width: 100%;
         }
         
-        .form-field textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .form-field .file-upload {
-            border: 2px dashed #ccc !important;
-            background: #f9f9f9 !important;
-            cursor: pointer;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .form-field .color-picker {
-             height: 40px;
-             cursor: pointer;
-        }
-
         .submit-button-container {
             text-align: center;
             margin-top: 40px;
@@ -262,11 +242,7 @@
             <nav class="sidebar-nav">
                 <button class="nav-button active" data-step="1"><i class="fas fa-briefcase button-icon"></i> Business Info</button>
                 <button class="nav-button" data-step="2"><i class="fas fa-user-tie button-icon"></i> Personal Info</button>
-                <button class="nav-button" data-step="3"><i class="fas fa-palette button-icon"></i> Branding</button>
-                <button class="nav-button" data-step="4"><i class="fas fa-share-alt button-icon"></i> Social Media</button>
-                <button class="nav-button" data-step="5"><i class="fas fa-quote-left button-icon"></i> Testimonials</button>
-                <button class="nav-button" data-step="6"><i class="fas fa-chart-line button-icon"></i> Experience</button>
-                <button class="nav-button" data-step="7"><i class="fas fa-calendar-alt button-icon"></i> Calendar</button>
+                <!-- Add other buttons as needed -->
             </nav>
 
             <!-- Form Content Pane -->
@@ -277,33 +253,41 @@
 
                 <div class="progress-bar-wrapper">
                     <div class="progress-outer">
-                        <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
+                        <div class="progress-inner" id="progress-bar" style="width: 50%;">50% Complete</div>
                     </div>
                 </div>
 
                 <div class="form-content-wrapper">
-                    <!-- Step 1: Business Info - RESTORED -->
+                    <!-- Step 1: Business Info - CORRECTED AND EXPANDED -->
                     <div id="form-step-1" class="form-container active">
                         <form>
                             <div class="form-grid">
-                                <div class="form-field full-width"><label for="location_name">Business Name</label><input type="text" id="location_name" name="location_name" placeholder="Your Company LLC"></div>
-                                <div class="form-field"><label for="location_email">Business Email</label><input type="email" id="location_email" name="location_email" placeholder="contact@yourcompany.com"></div>
-                                <div class="form-field"><label for="location_phone">Business Phone Number</label><input type="tel" id="location_phone" name="location_phone" placeholder="(555) 123-4567"></div>
-                                <div class="form-field full-width"><label for="location_website">Website URL</label><input type="url" id="location_website" name="location_website" placeholder="https://www.yourcompany.com"></div>
-                                <div class="form-field full-width"><label for="location_address">Street Address</label><input type="text" id="location_address" name="location_address" placeholder="123 Main St"></div>
-                                <div class="form-field"><label for="location_city">City</label><input type="text" id="location_city" name="location_city" placeholder="Anytown"></div>
-                                <div class="form-field"><label for="location_state">State / Province</label><input type="text" id="location_state" name="location_state" placeholder="CA"></div>
-                                <div class="form-field"><label for="location_postal_code">Zip / Postal Code</label><input type="text" id="location_postal_code" name="location_postal_code" placeholder="90210"></div>
-                                <div class="form-field"><label for="location_country">Country</label><input type="text" id="location_country" name="location_country" placeholder="USA"></div>
+                                <div class="form-field full-width"><label for="contact_company_name">Business Name</label><input type="text" id="contact_company_name" name="contact.company_name" placeholder="Your Company LLC"></div>
+                                <div class="form-field"><label for="business_email">Business Email</label><input type="email" id="business_email" name="business_email" placeholder="contact@yourcompany.com"></div>
+                                <div class="form-field"><label for="business_phone">Phone Number</label><input type="tel" id="business_phone" name="business_phone" placeholder="(555) 123-4567"></div>
+                                <div class="form-field full-width"><label for="contact_website">Website URL</label><input type="url" id="contact_website" name="contact.website" placeholder="https://www.yourcompany.com"></div>
+                                
+                                <h4 class="full-width">Business Address</h4>
+                                <div class="form-field full-width"><label for="business_address">Street Address</label><input type="text" id="business_address" name="business_address" placeholder="123 Main St"></div>
+                                <div class="form-field"><label for="business_city">City</label><input type="text" id="business_city" name="business_city" placeholder="Anytown"></div>
+                                <div class="form-field"><label for="business_state">State / Province</label><input type="text" id="business_state" name="business_state" placeholder="CA"></div>
+                                <div class="form-field"><label for="business_postal_code">Zip / Postal Code</label><input type="text" id="business_postal_code" name="business_postal_code" placeholder="90210"></div>
+                                <div class="form-field"><label for="business_country">Country</label><input type="text" id="business_country" name="business_country" placeholder="USA"></div>
+
+                                <h4 class="full-width">Location Settings</h4>
                                 <div class="form-field"><label for="location_timezone">Time Zone</label><input type="text" id="location_timezone" name="location_timezone" placeholder="America/Los_Angeles"></div>
-                                <div class="form-field"><label for="location_ein">EIN or Tax ID</label><input type="text" id="location_ein" name="ein" placeholder="XX-XXXXXXX"></div>
-                                <div class="form-field"><label for="location_currency">Currency</label><input type="text" id="location_currency" name="currency" placeholder="USD"></div>
-                                <div class="form-field"><label for="location_locale">Locale</label><input type="text" id="location_locale" name="locale" placeholder="en-US"></div>
+                                <div class="form-field"><label for="currency">Currency</label><input type="text" id="currency" name="currency" placeholder="USD"></div>
+                                <div class="form-field"><label for="locale">Locale</label><input type="text" id="locale" name="locale" placeholder="en-US"></div>
+                                
+                                <h4 class="full-width">Legal & Industry</h4>
+                                <div class="form-field"><label for="ein">EIN or Tax ID</label><input type="text" id="ein" name="ein" placeholder="XX-XXXXXXX"></div>
+                                <div class="form-field"><label for="company_registration_number">Company Registration Number</label><input type="text" id="company_registration_number" name="company_registration_number" placeholder="Optional"></div>
+                                <div class="form-field"><label for="industry">Industry</label><input type="text" id="industry" name="industry" placeholder="e.g., Insurance, Financial Services"></div>
                             </div>
                         </form>
                     </div>
 
-                    <!-- Step 2: Personal Info - VERIFIED -->
+                    <!-- Step 2: Personal Info - CORRECTED AND EXPANDED -->
                     <div id="form-step-2" class="form-container">
                         <form>
                              <div class="form-grid">
@@ -311,61 +295,15 @@
                                 <div class="form-field"><label for="contact_last_name">Last Name</label><input type="text" id="contact_last_name" name="contact.last_name" placeholder="Doe"></div>
                                 <div class="form-field"><label for="contact_email">Email Address</label><input type="email" id="contact_email" name="contact.email" placeholder="john.doe@email.com"></div>
                                 <div class="form-field"><label for="contact_phone">Phone Number</label><input type="tel" id="contact_phone" name="contact.phone" placeholder="(555) 867-5309"></div>
-                                <div class="form-field"><label for="contact_dob">Date of Birth</label><input type="date" id="contact_dob" name="contact.date_of_birth"></div>
-                                <div class="form-field"><label for="contact_pref">Preferred Contact Method</label>
-                                    <select id="contact_pref" name="preferred_contact_method">
-                                        <option value="email">Email</option>
-                                        <option value="phone">Phone Call</option>
-                                        <option value="sms">Text Message (SMS)</option>
-                                    </select>
-                                </div>
-                                <div class="form-field full-width"><label for="contact_timezone">Time Zone</label><input type="text" id="contact_timezone" name="contact.timezone" placeholder="America/New_York"></div>
-                                <div class="form-field hidden"><input type="hidden" name="contact.source" value="Onboarding Form"></div>
+                                <div class="form-field full-width"><label for="contact_dob">Date of Birth</label><input type="date" id="contact_dob" name="contact.date_of_birth"></div>
+                                
+                                <h4 class="full-width">Physical Address</h4>
+                                <div class="form-field full-width"><label for="contact_address1">Street Address</label><input type="text" id="contact_address1" name="contact.address1" placeholder="456 Personal Ave"></div>
+                                <div class="form-field"><label for="contact_city">City</label><input type="text" id="contact_city" name="contact.city" placeholder="Hometown"></div>
+                                <div class="form-field"><label for="contact_state">State / Province</label><input type="text" id="contact_state" name="contact.state" placeholder="FL"></div>
+                                <div class="form-field"><label for="contact_postal_code">Zip / Postal Code</label><input type="text" id="contact_postal_code" name="contact.postal_code" placeholder="33101"></div>
+                                <div class="form-field"><label for="contact_country">Country</label><input type="text" id="contact_country" name="contact.country" placeholder="USA"></div>
                             </div>
-                        </form>
-                    </div>
-
-                    <div id="form-step-3" class="form-container">
-                        <form>
-                           <div class="form-grid">
-                                <div class="form-field"><label for="brand_color_main">Brand Color (Main)</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#006511"></div>
-                                <div class="form-field"><label for="brand_color_cta">Brand Color (Call to Action)</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
-                                <div class="form-field"><label for="logo_rectangular">Business Logo (Rectangular)</label><input type="file" id="logo_rectangular" name="logo_rectangular" class="file-upload"></div>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <div id="form-step-4" class="form-container">
-                        <form>
-                            <div class="form-grid">
-                                <div class="form-field"><label for="social_facebook">Facebook URL</label><input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage"></div>
-                                <div class="form-field"><label for="social_instagram">Instagram URL</label><input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle"></div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="form-step-5" class="form-container">
-                        <form>
-                            <h4>Testimonial 1</h4>
-                            <div class="form-grid">
-                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_1_name" placeholder="Jane Smith"></div>
-                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="form-step-6" class="form-container">
-                        <form>
-                            <div class="form-grid">
-                                <div class="form-field full-width"><label for="top_products">Top 3 Products / Services</label><textarea id="top_products" name="top_products" placeholder="e.g., Life Insurance, Financial Planning, Retirement Solutions"></textarea></div>
-                                <div class="form-field full-width"><label for="years_experience">Years of Experience</label><input type="number" id="years_experience" name="years_experience" placeholder="10"></div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="form-step-7" class="form-container">
-                        <form>
-                            <div class="form-field full-width"><label for="calendar_integration">Calendar Integration Link</label><input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here"></div>
                         </form>
                     </div>
 
@@ -407,7 +345,8 @@
                 
                 formTitle.textContent = stepTitles[step - 1];
 
-                const progressPercentage = (step / 7) * 100;
+                // Simplified progress bar for this 2-step example
+                const progressPercentage = (step / 2) * 100;
                 progressBar.style.width = `${progressPercentage}%`;
                 progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
             });
