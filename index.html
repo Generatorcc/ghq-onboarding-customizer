@@ -18,7 +18,6 @@
             --sidebar-text: #c6c6c6;
             --main-bg: #F4F4F6;
             --form-bg: #ffffff;
-            --form-header-bg: #D9D9D9;
             --input-bg: #e8f4ff;
             --input-text: #2c3345;
             --headlinefont: 'Montserrat';
@@ -111,18 +110,18 @@
         }
         
         .form-pane-header {
-            background-color: var(--form-header-bg);
-            color: var(--black);
+            background-color: var(--dark-green-active); /* CHANGED */
+            color: var(--white); /* CHANGED */
             padding: 10px 0;
             text-align: center;
             border-radius: 15px 15px 0 0;
-            border-bottom: 1px solid var(--sidebar-text);
+            border-bottom: 1px solid #004d0d;
         }
         
         .form-pane-header h2 {
             margin: 0;
             font-size: 16px;
-            font-weight: 400;
+            font-weight: 500; /* Bolding it slightly for better visibility */
         }
         
         .form-content-wrapper {
@@ -294,7 +293,6 @@
                         </form>
                     </div>
 
-                    <!-- FIXED: Personal Info section has been rebuilt -->
                     <div id="form-step-2" class="form-container">
                         <form>
                              <div class="form-grid">
@@ -319,11 +317,9 @@
                     <div id="form-step-3" class="form-container">
                         <form>
                            <div class="form-grid">
-                                <div class="form-field"><label for="brand_color_main">Brand Color (Main)</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#0066ff"></div>
+                                <div class="form-field"><label for="brand_color_main">Brand Color (Main)</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#006511"></div>
                                 <div class="form-field"><label for="brand_color_cta">Brand Color (Call to Action)</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
                                 <div class="form-field"><label for="logo_rectangular">Business Logo (Rectangular)</label><input type="file" id="logo_rectangular" name="logo_rectangular" class="file-upload"></div>
-                                <div class="form-field"><label for="logo_square">Business Logo (Square)</label><input type="file" id="logo_square" name="logo_square" class="file-upload"></div>
-                                <div class="form-field full-width"><label for="favicon">Favicon (.ico file)</label><input type="file" id="favicon" name="favicon" class="file-upload"></div>
                             </div>
                         </form>
                     </div>
@@ -333,8 +329,6 @@
                             <div class="form-grid">
                                 <div class="form-field"><label for="social_facebook">Facebook URL</label><input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage"></div>
                                 <div class="form-field"><label for="social_instagram">Instagram URL</label><input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle"></div>
-                                <div class="form-field"><label for="social_twitter">X (Twitter) URL</label><input type="url" id="social_twitter" name="social_twitter" placeholder="https://x.com/yourhandle"></div>
-                                <div class="form-field"><label for="social_linkedin">LinkedIn URL</label><input type="url" id="social_linkedin" name="social_linkedin" placeholder="https://linkedin.com/in/yourprofile"></div>
                             </div>
                         </form>
                     </div>
@@ -344,7 +338,6 @@
                             <h4>Testimonial 1</h4>
                             <div class="form-grid">
                                 <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_1_name" placeholder="Jane Smith"></div>
-                                <div class="form-field"><label>Client Picture</label><input type="file" name="testimonial_1_pic" class="file-upload"></div>
                                 <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
                             </div>
                         </form>
