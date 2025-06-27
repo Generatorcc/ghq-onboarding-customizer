@@ -107,8 +107,8 @@
             box-shadow: 0 0 3px 0 #7070706b;
             display: flex;
             flex-direction: column;
-            /* FIXED: Set a minimum height to ensure the pane is tall enough */
-            min-height: 800px; /* Adjust this value if needed */
+            /* FIXED: Set a minimum height to ensure the pane is tall enough and there's space below the button */
+            min-height: 950px; /* Adjust this value if needed to ensure space */
         }
         
         .form-pane-header {
@@ -126,10 +126,10 @@
             font-weight: 500;
         }
         
-        /* FIXED: This wrapper now grows to fill the space in the flex container */
+        /* This wrapper will now grow, pushing the button to the bottom of the flex container */
         .form-content-wrapper {
             padding: 20px 30px;
-            flex-grow: 1;
+            flex-grow: 1; 
         }
         
         .form-container {
@@ -162,7 +162,6 @@
             font-weight: 500;
             margin-bottom: 5px;
         }
-        /* ADDED: Helper text for image sizes */
         .form-field .helper-text {
             font-size: 12px;
             color: #777;
@@ -212,7 +211,7 @@
 
         .submit-button-container {
             text-align: center;
-            padding: 20px 0; /* Changed from margin-top to padding for better layout control */
+            padding: 20px 0; 
         }
         .submit-button {
             background: var(--kelly-green);
@@ -297,7 +296,26 @@
                     <div class="form-content-wrapper">
                         <!-- Step 1: Business Info -->
                         <div id="form-step-1" class="form-container active">
-                            <!-- Business Info content -->
+                            <div class="form-grid two-col">
+                                <div class="form-field full-width"><label for="contact_company_name">Business Name</label><input type="text" id="contact_company_name" name="contact.company_name" placeholder="Your Company LLC"></div>
+                                <div class="form-field"><label for="business_email">Business Email</label><input type="email" id="business_email" name="business_email" placeholder="contact@yourcompany.com"></div>
+                                <div class="form-field"><label for="business_phone">Phone Number</label><input type="tel" id="business_phone" name="business_phone" placeholder="(555) 123-4567"></div>
+                                <div class="form-field full-width"><label for="contact_website">Website URL</label><input type="url" id="contact_website" name="contact.website" placeholder="https://www.yourcompany.com"></div>
+                                <h4 class="full-width">Business Address</h4>
+                                <div class="form-field full-width"><label for="business_address">Street Address</label><input type="text" id="business_address" name="business_address" placeholder="123 Main St"></div>
+                                <div class="form-field"><label for="business_city">City</label><input type="text" id="business_city" name="business_city" placeholder="Anytown"></div>
+                                <div class="form-field"><label for="business_state">State / Province</label><input type="text" id="business_state" name="business_state" placeholder="CA"></div>
+                                <div class="form-field"><label for="business_postal_code">Zip / Postal Code</label><input type="text" id="business_postal_code" name="business_postal_code" placeholder="90210"></div>
+                                <div class="form-field"><label for="business_country">Country</label><input type="text" id="business_country" name="business_country" placeholder="USA"></div>
+                                <h4 class="full-width">Location Settings</h4>
+                                <div class="form-field"><label for="location_timezone">Time Zone</label><input type="text" id="location_timezone" name="location_timezone" placeholder="America/Los_Angeles"></div>
+                                <div class="form-field"><label for="currency">Currency</label><input type="text" id="currency" name="currency" placeholder="USD"></div>
+                                <div class="form-field"><label for="locale">Locale</label><input type="text" id="locale" name="locale" placeholder="en-US"></div>
+                                <h4 class="full-width">Legal & Industry</h4>
+                                <div class="form-field"><label for="ein">EIN or Tax ID</label><input type="text" id="ein" name="ein" placeholder="XX-XXXXXXX"></div>
+                                <div class="form-field"><label for="company_registration_number">Company Registration Number</label><input type="text" id="company_registration_number" name="company_registration_number" placeholder="Optional"></div>
+                                <div class="form-field"><label for="industry">Industry</label><input type="text" id="industry" name="industry" placeholder="e.g., Insurance, Financial Services"></div>
+                            </div>
                         </div>
 
                         <!-- Step 2: Personal Info -->
@@ -314,7 +332,11 @@
                                     <input type="file" id="profile_pic" name="profile_pic" class="file-upload">
                                 </div>
                                 <h4 class="full-width">Physical Address</h4>
-                                <!-- address fields... -->
+                                <div class="form-field full-width"><label for="contact_address1">Street Address</label><input type="text" id="contact_address1" name="contact.address1" placeholder="456 Personal Ave"></div>
+                                <div class="form-field"><label for="contact_city">City</label><input type="text" id="contact_city" name="contact.city" placeholder="Hometown"></div>
+                                <div class="form-field"><label for="contact_state">State / Province</label><input type="text" id="contact_state" name="contact.state" placeholder="FL"></div>
+                                <div class="form-field"><label for="contact_postal_code">Zip / Postal Code</label><input type="text" id="contact_postal_code" name="contact.postal_code" placeholder="33101"></div>
+                                <div class="form-field"><label for="contact_country">Country</label><input type="text" id="contact_country" name="contact.country" placeholder="USA"></div>
                             </div>
                         </div>
 
@@ -348,7 +370,14 @@
                         
                         <!-- Step 4: Social Media -->
                         <div id="form-step-4" class="form-container">
-                            <!-- Social media content -->
+                            <div class="form-grid two-col">
+                                <div class="form-field"><label for="social_facebook">Facebook URL</label><input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage"></div>
+                                <div class="form-field"><label for="social_instagram">Instagram URL</label><input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle"></div>
+                                <div class="form-field"><label for="social_twitter">X (Twitter) URL</label><input type="url" id="social_twitter" name="social_twitter" placeholder="https://x.com/yourhandle"></div>
+                                <div class="form-field"><label for="social_linkedin">LinkedIn URL</label><input type="url" id="social_linkedin" name="social_linkedin" placeholder="https://linkedin.com/in/yourprofile"></div>
+                                <div class="form-field"><label for="social_tiktok">TikTok URL</label><input type="url" id="social_tiktok" name="social_tiktok" placeholder="https://tiktok.com/@yourhandle"></div>
+                                <div class="form-field"><label for="social_gmb">Google My Business URL</label><input type="url" id="social_gmb" name="social_gmb" placeholder="https://maps.google.com/..."></div>
+                            </div>
                         </div>
 
                         <!-- Step 5: Testimonials -->
@@ -387,16 +416,25 @@
                             </div>
                         </div>
 
-                        <!-- Step 6 and 7 -->
+                        <!-- Step 6: Experience -->
                         <div id="form-step-6" class="form-container">
-                            <!-- Experience content -->
+                            <div class="form-grid two-col">
+                                <div class="form-field full-width"><label for="short_bio">Short Bio</label><textarea id="short_bio" name="short_bio" placeholder="Write a brief professional bio..."></textarea></div>
+                                <h4 class="full-width">Top 3 Products/Services</h4>
+                                <div class="form-field full-width"><label for="product_1">Product/Service 1</label><input type="text" id="product_1" name="product_1" placeholder="e.g., Life Insurance"></div>
+                                <div class="form-field full-width"><label for="product_2">Product/Service 2</label><input type="text" id="product_2" name="product_2" placeholder="e.g., Financial Planning"></div>
+                                <div class="form-field full-width"><label for="product_3">Product/Service 3</label><input type="text" id="product_3" name="product_3" placeholder="e.g., Retirement Solutions"></div>
+                            </div>
                         </div>
+
+                        <!-- Step 7: Calendar -->
                         <div id="form-step-7" class="form-container">
-                           <!-- Calendar content -->
+                            <div class="form-grid two-col">
+                                <div class="form-field full-width"><label for="calendar_integration">Calendar Booking Link</label><input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here"></div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Button is now outside the content wrapper but inside the form -->
+                    
                     <div class="submit-button-container">
                          <button type="button" class="submit-button" id="save-and-continue-btn">Save & Continue</button>
                     </div>
@@ -437,7 +475,6 @@
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
-            // FIXED: Button text logic
             saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Submit Onboarding' : 'Save & Continue';
         }
 
@@ -454,7 +491,6 @@
             });
         });
 
-        // FIXED: Removed validation logic
         saveAndContinueBtn.addEventListener('click', function () {
             if (currentStep < totalSteps) {
                 goToStep(currentStep + 1);
