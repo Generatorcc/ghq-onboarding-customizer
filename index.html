@@ -19,7 +19,7 @@
             --gray: #cbd5e0;
             --black: #000000;
             --kelly-green: #4CBB17;
-            --dark-green-active: #006511; /* New color for active buttons */
+            --dark-green-active: #006511;
             --sidebar-bg: #313a4a;
             --sidebar-text: #c6c6c6;
             --main-bg: #F4F4F6;
@@ -104,7 +104,7 @@
         }
 
         .sidebar-nav .nav-button.active {
-            background: var(--dark-green-active) !important; /* CHANGED: Dark green when active */
+            background: var(--dark-green-active) !important;
             color: var(--white) !important;
         }
 
@@ -227,14 +227,13 @@
 
         /* ACTIONS AREA (BUTTON & PROGRESS BAR) */
         .form-actions-container {
-            margin-top: 144px; /* CHANGED: Spacing of 1.5in (approx) */
+            margin-top: 30px; /* CHANGED: Reduced spacing */
         }
         .submit-button-container {
             text-align: center;
-            margin-bottom: 20px; /* Space between button and progress bar */
         }
         .submit-button {
-            background: var(--kelly-green); /* CHANGED: Green button */
+            background: var(--kelly-green);
             border: none;
             border-radius: 5px;
             padding: 12px 50px;
@@ -244,8 +243,10 @@
             cursor: pointer;
             width: auto;
         }
+
+        /* PROGRESS BAR STYLES */
         .progress-bar-wrapper {
-            padding: 0 10%;
+            padding: 15px 10% 0; /* CHANGED: Moved padding here */
         }
         .progress-outer {
             background-color: var(--gray);
@@ -255,7 +256,7 @@
             overflow: hidden;
         }
         .progress-inner {
-            background: var(--kelly-green); /* CHANGED: Green progress bar */
+            background: var(--kelly-green);
             height: 100%;
             width: 0%; /* JS will control this */
             color: white;
@@ -309,8 +310,15 @@
                     <h2 id="form-title">Step 1: Business Info</h2>
                 </div>
 
+                <!-- MOVED: Progress bar is now at the top of the form area -->
+                <div class="progress-bar-wrapper">
+                    <div class="progress-outer">
+                        <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
+                    </div>
+                </div>
+
                 <div class="form-content-wrapper">
-                    <!-- Step 1: Business Info - COMPLETELY REBUILT -->
+                    <!-- Step 1: Business Info -->
                     <div id="form-step-1" class="form-container active">
                         <form>
                             <div class="form-grid">
@@ -331,7 +339,7 @@
                         </form>
                     </div>
 
-                    <!-- Step 2: Personal Info - COMPLETELY REBUILT -->
+                    <!-- Step 2: Personal Info -->
                     <div id="form-step-2" class="form-container">
                         <form>
                             <div class="form-grid">
@@ -419,15 +427,9 @@
                     </div>
                 </div>
 
-                <!-- CHANGED: Actions are now wrapped and placed at the bottom -->
                 <div class="form-actions-container">
                     <div class="submit-button-container">
                          <button class="submit-button">Save & Continue</button>
-                    </div>
-                    <div class="progress-bar-wrapper">
-                        <div class="progress-outer">
-                            <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
-                        </div>
                     </div>
                 </div>
                 <div style="height: 20px;"></div>
