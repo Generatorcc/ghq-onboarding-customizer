@@ -19,7 +19,7 @@
             --gray: #cbd5e0;
             --black: #000000;
             --kelly-green: #4CBB17;
-            --blue-gradient: linear-gradient(285deg, #00aeef 24%, #0066ff 65%);
+            --dark-green-active: #006511; /* New color for active buttons */
             --sidebar-bg: #313a4a;
             --sidebar-text: #c6c6c6;
             --main-bg: #F4F4F6;
@@ -51,25 +51,9 @@
         .page-container {
             display: flex;
             min-height: 100vh;
+            flex-direction: column;
         }
         
-        /* HEADER */
-        .header-section {
-            padding: 10px 0;
-            background: var(--blue-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-left: 37px;
-        }
-        .header-logo img {
-            width: 250px;
-        }
-        .header-title img {
-            width: 350px;
-            margin-left: -30px;
-        }
-
         /* MAIN CONTENT AREA */
         .main-content {
             display: flex;
@@ -120,7 +104,7 @@
         }
 
         .sidebar-nav .nav-button.active {
-            background: var(--blue-gradient) !important;
+            background: var(--dark-green-active) !important; /* CHANGED: Dark green when active */
             color: var(--white) !important;
         }
 
@@ -191,6 +175,7 @@
         .form-field input[type="url"],
         .form-field input[type="tel"],
         .form-field input[type="number"],
+        .form-field select,
         .form-field textarea,
         .form-field .color-picker,
         .form-field .file-upload {
@@ -216,6 +201,8 @@
             background: #f9f9f9 !important;
             cursor: pointer;
             text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         .form-field .color-picker {
@@ -238,10 +225,27 @@
             margin-top: 4px;
         }
 
-        /* PROGRESS BAR */
+        /* ACTIONS AREA (BUTTON & PROGRESS BAR) */
+        .form-actions-container {
+            margin-top: 144px; /* CHANGED: Spacing of 1.5in (approx) */
+        }
+        .submit-button-container {
+            text-align: center;
+            margin-bottom: 20px; /* Space between button and progress bar */
+        }
+        .submit-button {
+            background: var(--kelly-green); /* CHANGED: Green button */
+            border: none;
+            border-radius: 5px;
+            padding: 12px 50px;
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: auto;
+        }
         .progress-bar-wrapper {
             padding: 0 10%;
-            margin-top: 20px;
         }
         .progress-outer {
             background-color: var(--gray);
@@ -251,7 +255,7 @@
             overflow: hidden;
         }
         .progress-inner {
-            background: var(--blue-gradient);
+            background: var(--kelly-green); /* CHANGED: Green progress bar */
             height: 100%;
             width: 0%; /* JS will control this */
             color: white;
@@ -262,41 +266,7 @@
             font-weight: bold;
             transition: width 0.4s ease-in-out;
         }
-
-        /* NEXT/SUBMIT BUTTON */
-        .submit-button-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .submit-button {
-            background: var(--blue-gradient);
-            border: none;
-            border-radius: 5px;
-            padding: 12px 50px;
-            color: var(--white);
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            width: auto;
-        }
         
-        /* FOOTER */
-        .footer-section {
-            padding: 20px 0;
-            background: var(--blue-gradient);
-            color: white;
-            text-align: center;
-        }
-        .footer-logo {
-            width: 250px;
-            margin-bottom: 15px;
-        }
-        .footer-section h2 {
-            font-size: 18px;
-            font-weight: 400;
-            margin: 0;
-        }
-
         @media screen and (max-width: 992px) {
             .main-content {
                 flex-direction: column;
@@ -340,62 +310,38 @@
                 </div>
 
                 <div class="form-content-wrapper">
-                    <!-- Step 1: Business Info -->
+                    <!-- Step 1: Business Info - COMPLETELY REBUILT -->
                     <div id="form-step-1" class="form-container active">
                         <form>
                             <div class="form-grid">
-                                <div class="form-field full-width">
-                                    <label for="business_name">Business Name</label>
-                                    <input type="text" id="business_name" name="business_name" placeholder="Your Company LLC">
-                                </div>
-                                <div class="form-field full-width">
-                                    <label for="business_address">Business Address</label>
-                                    <input type="text" id="business_address" name="business_address" placeholder="123 Main St, Anytown, USA">
-                                </div>
-                                <div class="form-field">
-                                    <label for="business_email">Business Email</label>
-                                    <input type="email" id="business_email" name="business_email" placeholder="contact@yourcompany.com">
-                                </div>
-                                <div class="form-field">
-                                    <label for="business_phone">Business Phone Number</label>
-                                    <input type="tel" id="business_phone" name="business_phone" placeholder="(555) 123-4567">
-                                </div>
-                                <div class="form-field full-width">
-                                    <label for="business_domain">Business Domain</label>
-                                    <input type="url" id="business_domain" name="business_domain" placeholder="https://www.yourcompany.com">
-                                </div>
+                                <div class="form-field full-width"><label for="location_name">Business Name</label><input type="text" id="location_name" name="location_name" placeholder="Your Company LLC"></div>
+                                <div class="form-field"><label for="location_email">Business Email</label><input type="email" id="location_email" name="location_email" placeholder="contact@yourcompany.com"></div>
+                                <div class="form-field"><label for="location_phone">Business Phone Number</label><input type="tel" id="location_phone" name="location_phone" placeholder="(555) 123-4567"></div>
+                                <div class="form-field full-width"><label for="location_website">Website URL</label><input type="url" id="location_website" name="location_website" placeholder="https://www.yourcompany.com"></div>
+                                <div class="form-field full-width"><label for="location_address">Street Address</label><input type="text" id="location_address" name="location_address" placeholder="123 Main St"></div>
+                                <div class="form-field"><label for="location_city">City</label><input type="text" id="location_city" name="location_city" placeholder="Anytown"></div>
+                                <div class="form-field"><label for="location_state">State / Province</label><input type="text" id="location_state" name="location_state" placeholder="CA"></div>
+                                <div class="form-field"><label for="location_postal_code">Zip / Postal Code</label><input type="text" id="location_postal_code" name="location_postal_code" placeholder="90210"></div>
+                                <div class="form-field"><label for="location_country">Country</label><input type="text" id="location_country" name="location_country" placeholder="USA"></div>
+                                <div class="form-field"><label for="location_timezone">Time Zone</label><input type="text" id="location_timezone" name="location_timezone" placeholder="America/Los_Angeles"></div>
+                                <div class="form-field"><label for="location_ein">EIN or Tax ID</label><input type="text" id="location_ein" name="ein" placeholder="XX-XXXXXXX"></div>
+                                <div class="form-field"><label for="location_currency">Currency</label><input type="text" id="location_currency" name="currency" placeholder="USD"></div>
+                                <div class="form-field"><label for="location_locale">Locale</label><input type="text" id="location_locale" name="locale" placeholder="en-US"></div>
                             </div>
                         </form>
                     </div>
 
-                    <!-- Step 2: Personal Info -->
+                    <!-- Step 2: Personal Info - COMPLETELY REBUILT -->
                     <div id="form-step-2" class="form-container">
                         <form>
                             <div class="form-grid">
-                                <div class="form-field">
-                                    <label for="owner_name">Owner's Full Name</label>
-                                    <input type="text" id="owner_name" name="owner_name" placeholder="John Doe">
-                                </div>
-                                <div class="form-field">
-                                    <label for="owner_designation">Owner's Designation</label>
-                                    <input type="text" id="owner_designation" name="owner_designation" placeholder="CEO / Founder">
-                                </div>
-                                <div class="form-field full-width">
-                                    <label for="owner_bio">Owner's Bio</label>
-                                    <textarea id="owner_bio" name="owner_bio" placeholder="A short biography..."></textarea>
-                                </div>
-                                <div class="form-field">
-                                    <label for="owner_profile_pic">Owner's Profile Picture</label>
-                                    <input type="file" id="owner_profile_pic" name="owner_profile_pic" class="file-upload">
-                                </div>
-                                <div class="form-field">
-                                    <label for="agent_signature">Agent Signature (Image)</label>
-                                    <input type="file" id="agent_signature" name="agent_signature" class="file-upload">
-                                </div>
-                                <div class="form-field full-width">
-                                    <label for="npn">National Producer Number (NPN)</label>
-                                    <input type="number" id="npn" name="npn" placeholder="12345678">
-                                </div>
+                                <div class="form-field"><label for="contact_first_name">Owner's First Name</label><input type="text" id="contact_first_name" name="contact.first_name" placeholder="John"></div>
+                                <div class="form-field"><label for="contact_last_name">Owner's Last Name</label><input type="text" id="contact_last_name" name="contact.last_name" placeholder="Doe"></div>
+                                <div class="form-field full-width"><label for="owner_designation">Owner's Designation</label><input type="text" id="owner_designation" name="owner_designation" placeholder="CEO / Founder"></div>
+                                <div class="form-field full-width"><label for="owner_bio">Owner's Bio</label><textarea id="owner_bio" name="owner_bio" placeholder="A short biography..."></textarea></div>
+                                <div class="form-field"><label for="owner_profile_pic">Owner's Profile Picture</label><input type="file" id="owner_profile_pic" name="owner_profile_pic" class="file-upload"></div>
+                                <div class="form-field"><label for="agent_signature">Agent Signature (Image)</label><input type="file" id="agent_signature" name="agent_signature" class="file-upload"></div>
+                                <div class="form-field full-width"><label for="npn">National Producer Number (NPN)</label><input type="number" id="npn" name="npn" placeholder="12345678"></div>
                             </div>
                         </form>
                     </div>
@@ -404,26 +350,11 @@
                     <div id="form-step-3" class="form-container">
                         <form>
                            <div class="form-grid">
-                                <div class="form-field">
-                                    <label for="brand_color_main">Brand Color (Main)</label>
-                                    <input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#0066ff">
-                                </div>
-                                <div class="form-field">
-                                    <label for="brand_color_cta">Brand Color (Call to Action)</label>
-                                    <input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17">
-                                </div>
-                                <div class="form-field">
-                                    <label for="logo_rectangular">Business Logo (Rectangular)</label>
-                                    <input type="file" id="logo_rectangular" name="logo_rectangular" class="file-upload">
-                                </div>
-                                <div class="form-field">
-                                    <label for="logo_square">Business Logo (Square)</label>
-                                    <input type="file" id="logo_square" name="logo_square" class="file-upload">
-                                </div>
-                                <div class="form-field full-width">
-                                    <label for="favicon">Favicon (.ico file)</label>
-                                    <input type="file" id="favicon" name="favicon" class="file-upload">
-                                </div>
+                                <div class="form-field"><label for="brand_color_main">Brand Color (Main)</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#0066ff"></div>
+                                <div class="form-field"><label for="brand_color_cta">Brand Color (Call to Action)</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
+                                <div class="form-field"><label for="logo_rectangular">Business Logo (Rectangular)</label><input type="file" id="logo_rectangular" name="logo_rectangular" class="file-upload"></div>
+                                <div class="form-field"><label for="logo_square">Business Logo (Square)</label><input type="file" id="logo_square" name="logo_square" class="file-upload"></div>
+                                <div class="form-field full-width"><label for="favicon">Favicon (.ico file)</label><input type="file" id="favicon" name="favicon" class="file-upload"></div>
                             </div>
                         </form>
                     </div>
@@ -432,30 +363,12 @@
                     <div id="form-step-4" class="form-container">
                         <form>
                             <div class="form-grid">
-                                <div class="form-field">
-                                    <label for="social_facebook">Facebook URL</label>
-                                    <input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage">
-                                </div>
-                                <div class="form-field">
-                                    <label for="social_instagram">Instagram URL</label>
-                                    <input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle">
-                                </div>
-                                 <div class="form-field">
-                                    <label for="social_twitter">X (Twitter) URL</label>
-                                    <input type="url" id="social_twitter" name="social_twitter" placeholder="https://x.com/yourhandle">
-                                </div>
-                                <div class="form-field">
-                                    <label for="social_linkedin">LinkedIn URL</label>
-                                    <input type="url" id="social_linkedin" name="social_linkedin" placeholder="https://linkedin.com/in/yourprofile">
-                                </div>
-                                <div class="form-field">
-                                    <label for="social_tiktok">TikTok URL</label>
-                                    <input type="url" id="social_tiktok" name="social_tiktok" placeholder="https://tiktok.com/@yourhandle">
-                                </div>
-                                <div class="form-field">
-                                    <label for="social_youtube">YouTube URL</label>
-                                    <input type="url" id="social_youtube" name="social_youtube" placeholder="https://youtube.com/yourchannel">
-                                </div>
+                                <div class="form-field"><label for="social_facebook">Facebook URL</label><input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage"></div>
+                                <div class="form-field"><label for="social_instagram">Instagram URL</label><input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle"></div>
+                                 <div class="form-field"><label for="social_twitter">X (Twitter) URL</label><input type="url" id="social_twitter" name="social_twitter" placeholder="https://x.com/yourhandle"></div>
+                                <div class="form-field"><label for="social_linkedin">LinkedIn URL</label><input type="url" id="social_linkedin" name="social_linkedin" placeholder="https://linkedin.com/in/yourprofile"></div>
+                                <div class="form-field"><label for="social_tiktok">TikTok URL</label><input type="url" id="social_tiktok" name="social_tiktok" placeholder="https://tiktok.com/@yourhandle"></div>
+                                <div class="form-field"><label for="social_youtube">YouTube URL</label><input type="url" id="social_youtube" name="social_youtube" placeholder="https://youtube.com/yourchannel"></div>
                             </div>
                         </form>
                     </div>
@@ -465,23 +378,23 @@
                         <form>
                             <h4>Testimonial 1</h4>
                             <div class="form-grid">
-                                <div class="form-field"><label>Client Name</label><input type="text" placeholder="Jane Smith"></div>
-                                <div class="form-field"><label>Client Picture</label><input type="file" class="file-upload"></div>
-                                <div class="form-field full-width"><label>Statement</label><textarea placeholder="This company is fantastic!"></textarea></div>
+                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_1_name" placeholder="Jane Smith"></div>
+                                <div class="form-field"><label>Client Picture</label><input type="file" name="testimonial_1_pic" class="file-upload"></div>
+                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
                             </div>
                             <hr>
                             <h4>Testimonial 2</h4>
                              <div class="form-grid">
-                                <div class="form-field"><label>Client Name</label><input type="text" placeholder="Mark Johnson"></div>
-                                <div class="form-field"><label>Client Picture</label><input type="file" class="file-upload"></div>
-                                <div class="form-field full-width"><label>Statement</label><textarea placeholder="I couldn't be happier with the results."></textarea></div>
+                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_2_name" placeholder="Mark Johnson"></div>
+                                <div class="form-field"><label>Client Picture</label><input type="file" name="testimonial_2_pic" class="file-upload"></div>
+                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_2_statement" placeholder="I couldn't be happier with the results."></textarea></div>
                             </div>
                             <hr>
                             <h4>Testimonial 3</h4>
                              <div class="form-grid">
-                                <div class="form-field"><label>Client Name</label><input type="text" placeholder="Emily White"></div>
-                                <div class="form-field"><label>Client Picture</label><input type="file" class="file-upload"></div>
-                                <div class="form-field full-width"><label>Statement</label><textarea placeholder="Five stars! Highly recommend."></textarea></div>
+                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_3_name" placeholder="Emily White"></div>
+                                <div class="form-field"><label>Client Picture</label><input type="file" name="testimonial_3_pic" class="file-upload"></div>
+                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_3_statement" placeholder="Five stars! Highly recommend."></textarea></div>
                             </div>
                         </form>
                     </div>
@@ -490,22 +403,9 @@
                     <div id="form-step-6" class="form-container">
                         <form>
                             <div class="form-grid">
-                                <div class="form-field full-width">
-                                    <label for="top_products">Top 3 Products / Services</label>
-                                    <textarea id="top_products" name="top_products" placeholder="e.g., Life Insurance, Financial Planning, Retirement Solutions"></textarea>
-                                </div>
-                                <div class="form-field full-width">
-                                    <label for="price_range">Price Range</label>
-                                    <div class="range-slider">
-                                        <span>$</span> <input type="number" id="price_range_min" placeholder="100"> 
-                                        <span>to</span>
-                                        <span>$</span> <input type="number" id="price_range_max" placeholder="5000">
-                                    </div>
-                                </div>
-                                <div class="form-field full-width">
-                                    <label for="years_experience">Years of Experience</label>
-                                    <input type="number" id="years_experience" name="years_experience" placeholder="10">
-                                </div>
+                                <div class="form-field full-width"><label for="top_products">Top 3 Products / Services</label><textarea id="top_products" name="top_products" placeholder="e.g., Life Insurance, Financial Planning, Retirement Solutions"></textarea></div>
+                                <div class="form-field full-width"><label>Price Range</label><div class="range-slider"><span>$</span> <input type="number" name="price_range_min" placeholder="100"> <span>to</span><span>$</span> <input type="number" name="price_range_max" placeholder="5000"></div></div>
+                                <div class="form-field full-width"><label for="years_experience">Years of Experience</label><input type="number" id="years_experience" name="years_experience" placeholder="10"></div>
                             </div>
                         </form>
                     </div>
@@ -513,37 +413,28 @@
                     <!-- Step 7: Calendar -->
                     <div id="form-step-7" class="form-container">
                         <form>
-                            <div class="form-field full-width">
-                                <label for="calendar_integration">Calendar Integration Link</label>
-                                <input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here">
-                                <span class="short-label">This link will be used to allow clients to book appointments with you.</span>
-                            </div>
-                            <div class="full-width" style="text-align:center; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
-                                <p>To connect your calendar for automated booking, please go to the 'Integrations' section of your account settings after completing this setup.</p>
-                            </div>
+                            <div class="form-field full-width"><label for="calendar_integration">Calendar Integration Link</label><input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here"><span class="short-label">This link will be used to allow clients to book appointments with you.</span></div>
+                            <div class="full-width" style="text-align:center; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;"><p>To connect your calendar for automated booking, please go to the 'Integrations' section of your account settings after completing this setup.</p></div>
                         </form>
                     </div>
                 </div>
 
-                <div class="progress-bar-wrapper">
-                    <div class="progress-outer">
-                        <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
+                <!-- CHANGED: Actions are now wrapped and placed at the bottom -->
+                <div class="form-actions-container">
+                    <div class="submit-button-container">
+                         <button class="submit-button">Save & Continue</button>
                     </div>
-                </div>
-
-                <div class="submit-button-container">
-                     <button class="submit-button">Save & Continue</button>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-outer">
+                            <div class="progress-inner" id="progress-bar" style="width: 14.3%;">14% Complete</div>
+                        </div>
+                    </div>
                 </div>
                 <div style="height: 20px;"></div>
 
             </div>
         </main>
     </div>
-    
-    <footer class="footer-section">
-        <img src="https://assets.cdn.filesafe.space/6U7lgWZQt8gh6UtP5hTT/media/65dbf7b8de43c932c31f8f19.png" alt="Footer Logo" class="footer-logo">
-        <h2> © Copyright Agent CRM Support 2024</h2>
-    </footer>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
