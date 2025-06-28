@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no">
     <title>Agent CRM - Account Customizer</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -20,8 +19,8 @@
             --form-bg: #ffffff;
             --input-bg: #e8f4ff;
             --input-text: #2c3345;
-            --headlinefont: 'Montserrat';
-            --contentfont: 'Lato';
+            --headlinefont: 'Montserrat', sans-serif;
+            --contentfont: 'Lato', sans-serif;
             --white: #ffffff;
             --gray: #cbd5e0;
             --black: #000000;
@@ -30,12 +29,14 @@
         body, html {
             margin: 0;
             padding: 0;
-            font-family: var(--contentfont), sans-serif;
+            font-family: var(--contentfont);
             background-color: var(--main-bg);
+            color: var(--input-text);
         }
         
-        h1, h2, h3, h4, h5, h6, span, button, a, p {
-            font-family: var(--headlinefont), sans-serif !important;
+        /* Correction: Made this rule less aggressive and removed !important */
+        h1, h2, h3, h4, h5, h6, .nav-button, .submit-button {
+            font-family: var(--headlinefont);
         }
 
         *, *:before, *:after {
@@ -105,7 +106,8 @@
         .form-pane {
             flex-grow: 1;
             background-color: var(--form-bg);
-            border: 1px solid var(--sidebar-text);
+            /* Correction: Replaced undefined --sidebar-text with --gray */
+            border: 1px solid var(--gray);
             border-radius: 15px;
             box-shadow: 0 0 3px 0 #7070706b;
             display: flex;
@@ -163,7 +165,6 @@
         }
         
         .form-field label {
-            color: var(--input-text);
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 5px;
@@ -175,14 +176,14 @@
             margin-bottom: 5px;
         }
 
-        .form-field input, .form-field select, .form-field textarea, .form-field .color-picker, .form-field .file-upload {
-            background-color: var(--input-bg) !important;
-            color: var(--input-text) !important;
-            border: 0px solid #ACACACFF !important;
-            border-radius: 5px !important;
-            padding: 8px 15px !important;
+        .form-field input, .form-field select, .form-field textarea {
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            border: 1px solid transparent;
+            border-radius: 5px;
+            padding: 8px 15px;
             box-shadow: none;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--contentfont);
             font-size: 14px;
             font-weight: 400;
             width: 100%;
@@ -194,16 +195,23 @@
         }
         
         .form-field .file-upload {
-            border: 2px dashed #ccc !important;
-            background: #f9f9f9 !important;
+            border: 2px dashed #ccc;
+            background: #f9f9f9;
             cursor: pointer;
             text-align: center;
             padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            font-family: var(--contentfont);
         }
 
         .form-field .color-picker {
              height: 40px;
+             width: 100%;
              cursor: pointer;
+             border: 1px solid var(--gray);
+             background: var(--input-bg);
+             padding: 2px;
         }
 
         .submit-button-container {
@@ -211,15 +219,20 @@
             margin-top: auto;
             padding: 40px 0;
         }
+        /* Correction: Added !important to ensure background color is applied. Adjusted padding. */
         .submit-button {
-            background: var(--kelly-green);
+            background: var(--kelly-green) !important;
             border: none;
             border-radius: 5px;
-            padding: 12px 50px;
+            padding: 12px 35px;
             color: var(--white);
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .submit-button:hover {
+             background: var(--dark-green-active) !important;
         }
 
         .progress-bar-wrapper {
@@ -251,12 +264,20 @@
             }
             .main-content {
                 flex-direction: column;
+                padding: 15px;
             }
             .sidebar-nav {
                 flex-direction: row;
                 flex-wrap: wrap;
                 width: 100%;
                 align-self: initial;
+                justify-content: center;
+            }
+            /* Correction: Made buttons flexible for smaller screens */
+            .sidebar-nav .nav-button {
+                flex: 1 1 180px; /* Allow buttons to grow and shrink */
+                width: auto;
+                justify-content: center;
             }
             .form-grid, .form-grid.two-col {
                 grid-template-columns: 1fr;
@@ -275,7 +296,8 @@
                 <button class="nav-button" data-step="4"><i class="fas fa-share-alt button-icon"></i> Social Media</button>
                 <button class="nav-button" data-step="5"><i class="fas fa-quote-left button-icon"></i> Testimonials</button>
                 <button class="nav-button" data-step="6"><i class="fas fa-chart-line button-icon"></i> Experience</button>
-                <button class="nav-button" data-step="7"><i class="fas fa-calendar-alt button-icon"></i> Calendar</button>
+                <!-- Correction: Consistent naming with JS -->
+                <button class="nav-button" data-step="7"><i class="fas fa-calendar-alt button-icon"></i> Calendar Setup</button>
             </nav>
 
             <!-- Form Content Pane -->
@@ -292,8 +314,8 @@
 
                 <form id="multi-step-form" action="YOUR_GHL_FORM_ENDPOINT_URL" method="POST">
                     <div class="form-content-wrapper">
-                        <!-- Step 1: Business Info -->
-                        <div id="form-step-1" class="form-container active">
+                        <!-- Correction: Added data-step attribute for more robust JS -->
+                        <div data-step="1" class="form-container active">
                             <div class="form-grid two-col">
                                 <div class="form-field full-width"><label for="contact_company_name">Business Name</label><input type="text" id="contact_company_name" name="contact.company_name" placeholder="Your Company LLC"></div>
                                 <div class="form-field"><label for="business_email">Business Email</label><input type="email" id="business_email" name="business_email" placeholder="contact@yourcompany.com"></div>
@@ -316,8 +338,7 @@
                             </div>
                         </div>
 
-                        <!-- Step 2: Personal Info -->
-                        <div id="form-step-2" class="form-container">
+                        <div data-step="2" class="form-container">
                             <div class="form-grid two-col">
                                 <div class="form-field"><label for="contact_first_name">First Name</label><input type="text" id="contact_first_name" name="contact.first_name" placeholder="John"></div>
                                 <div class="form-field"><label for="contact_last_name">Last Name</label><input type="text" id="contact_last_name" name="contact.last_name" placeholder="Doe"></div>
@@ -338,9 +359,8 @@
                             </div>
                         </div>
 
-                        <!-- Step 3: Branding -->
-                        <div id="form-step-3" class="form-container">
-                           <div class="form-grid three-col">
+                        <div data-step="3" class="form-container">
+                           <div class="form-grid">
                                 <div class="form-field"><label for="brand_color_main">Primary Color</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#006511"></div>
                                 <div class="form-field"><label for="brand_color_cta">Secondary Color</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
                                 <div class="form-field"><label for="brand_color_tertiary">Tertiary Color</label><input type="color" id="brand_color_tertiary" name="brand_color_tertiary" class="color-picker" value="#D9D9D9"></div>
@@ -366,8 +386,7 @@
                             </div>
                         </div>
                         
-                        <!-- Step 4: Social Media -->
-                        <div id="form-step-4" class="form-container">
+                        <div data-step="4" class="form-container">
                             <div class="form-grid two-col">
                                 <div class="form-field"><label for="social_facebook">Facebook URL</label><input type="url" id="social_facebook" name="social_facebook" placeholder="https://facebook.com/yourpage"></div>
                                 <div class="form-field"><label for="social_instagram">Instagram URL</label><input type="url" id="social_instagram" name="social_instagram" placeholder="https://instagram.com/yourhandle"></div>
@@ -378,44 +397,43 @@
                             </div>
                         </div>
 
-                        <!-- Step 5: Testimonials -->
-                        <div id="form-step-5" class="form-container">
+                        <div data-step="5" class="form-container">
                             <h4>Testimonial 1</h4>
                             <div class="form-grid two-col">
-                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_1_name" placeholder="Jane Smith"></div>
+                                <!-- Correction: Added for/id for accessibility -->
+                                <div class="form-field"><label for="testimonial_1_name">Client Name</label><input type="text" id="testimonial_1_name" name="testimonial_1_name" placeholder="Jane Smith"></div>
                                 <div class="form-field">
-                                    <label>Client Picture</label>
+                                    <label for="testimonial_1_pic">Client Picture</label>
                                     <span class="helper-text">(e.g., 200px by 200px)</span>
-                                    <input type="file" name="testimonial_1_pic" class="file-upload">
+                                    <input type="file" id="testimonial_1_pic" name="testimonial_1_pic" class="file-upload">
                                 </div>
-                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
+                                <div class="form-field full-width"><label for="testimonial_1_statement">Statement</label><textarea id="testimonial_1_statement" name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
                             </div>
                             <hr>
                             <h4>Testimonial 2</h4>
                             <div class="form-grid two-col">
-                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_2_name" placeholder="Mark Johnson"></div>
+                                <div class="form-field"><label for="testimonial_2_name">Client Name</label><input type="text" id="testimonial_2_name" name="testimonial_2_name" placeholder="Mark Johnson"></div>
                                 <div class="form-field">
-                                    <label>Client Picture</label>
+                                    <label for="testimonial_2_pic">Client Picture</label>
                                     <span class="helper-text">(e.g., 200px by 200px)</span>
-                                    <input type="file" name="testimonial_2_pic" class="file-upload">
+                                    <input type="file" id="testimonial_2_pic" name="testimonial_2_pic" class="file-upload">
                                 </div>
-                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_2_statement" placeholder="I couldn't be happier with the results."></textarea></div>
+                                <div class="form-field full-width"><label for="testimonial_2_statement">Statement</label><textarea id="testimonial_2_statement" name="testimonial_2_statement" placeholder="I couldn't be happier with the results."></textarea></div>
                             </div>
                             <hr>
                             <h4>Testimonial 3</h4>
                             <div class="form-grid two-col">
-                                <div class="form-field"><label>Client Name</label><input type="text" name="testimonial_3_name" placeholder="Emily White"></div>
+                                <div class="form-field"><label for="testimonial_3_name">Client Name</label><input type="text" id="testimonial_3_name" name="testimonial_3_name" placeholder="Emily White"></div>
                                 <div class="form-field">
-                                    <label>Client Picture</label>
+                                    <label for="testimonial_3_pic">Client Picture</label>
                                     <span class="helper-text">(e.g., 200px by 200px)</span>
-                                    <input type="file" name="testimonial_3_pic" class="file-upload">
+                                    <input type="file" id="testimonial_3_pic" name="testimonial_3_pic" class="file-upload">
                                 </div>
-                                <div class="form-field full-width"><label>Statement</label><textarea name="testimonial_3_statement" placeholder="Five stars! Highly recommend."></textarea></div>
+                                <div class="form-field full-width"><label for="testimonial_3_statement">Statement</label><textarea id="testimonial_3_statement" name="testimonial_3_statement" placeholder="Five stars! Highly recommend."></textarea></div>
                             </div>
                         </div>
 
-                        <!-- Step 6: Experience -->
-                        <div id="form-step-6" class="form-container">
+                        <div data-step="6" class="form-container">
                             <div class="form-grid two-col">
                                 <div class="form-field full-width"><label for="short_bio">Short Bio</label><textarea id="short_bio" name="short_bio" placeholder="Write a brief professional bio..."></textarea></div>
                                 <h4 class="full-width">Top 3 Products/Services</h4>
@@ -425,8 +443,7 @@
                             </div>
                         </div>
 
-                        <!-- Step 7: Calendar -->
-                        <div id="form-step-7" class="form-container">
+                        <div data-step="7" class="form-container">
                             <div class="form-grid two-col">
                                 <div class="form-field full-width"><label for="calendar_integration">Calendar Booking Link</label><input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here"></div>
                             </div>
@@ -434,7 +451,7 @@
                     </div>
                     
                     <div class="submit-button-container">
-                         <button type="button" class="submit-button" id="save-and-continue-btn">Save & Continue</button>
+                         <button type="button" class="submit-button" id="next-step-btn">Save & Continue</button>
                     </div>
                 </form>
             </div>
@@ -447,7 +464,7 @@
         const formContainers = document.querySelectorAll('.form-container');
         const formTitle = document.getElementById('form-title');
         const progressBar = document.getElementById('progress-bar');
-        const saveAndContinueBtn = document.getElementById('save-and-continue-btn');
+        const nextStepBtn = document.getElementById('next-step-btn');
         const mainForm = document.getElementById('multi-step-form');
 
         const totalSteps = navButtons.length;
@@ -460,20 +477,31 @@
         let currentStep = 1;
 
         function updateUI() {
+            // Update nav buttons
             navButtons.forEach(btn => {
                 btn.classList.toggle('active', parseInt(btn.dataset.step) === currentStep);
             });
 
+            // Update form container visibility
             formContainers.forEach(form => {
-                form.classList.toggle('active', parseInt(form.id.split('-')[2]) === currentStep);
+                // Correction: Using data-step for robustness
+                form.classList.toggle('active', parseInt(form.dataset.step) === currentStep);
             });
             
+            // Update title and progress bar
             formTitle.textContent = stepTitles[currentStep - 1];
             const progressPercentage = (currentStep / totalSteps) * 100;
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
-            saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Submit Onboarding' : 'Save & Continue';
+            // Update button text and type
+            if (currentStep === totalSteps) {
+                nextStepBtn.textContent = 'Submit Onboarding';
+                nextStepBtn.type = 'submit'; // Change to submit on the last step
+            } else {
+                nextStepBtn.textContent = 'Save & Continue';
+                nextStepBtn.type = 'button'; // Ensure it's a button on other steps
+            }
         }
 
         function goToStep(stepNumber) {
@@ -489,17 +517,20 @@
             });
         });
 
-        saveAndContinueBtn.addEventListener('click', function () {
+        nextStepBtn.addEventListener('click', function (e) {
+            // The form will only submit if the button's type is 'submit' (on the last step)
             if (currentStep < totalSteps) {
+                e.preventDefault(); // Prevent submission on intermediate steps
                 goToStep(currentStep + 1);
             } else {
+                // On the last step, the button is type="submit", so the form will submit naturally.
+                // You can add a confirmation alert here if you want.
                 alert('Onboarding Complete! Submitting your information.');
-                // For a real submission, you would have an endpoint URL in the form's action attribute.
-                // The line below would then submit the form data to GHL.
-                // mainForm.submit(); 
+                // The form will now submit to the 'action' URL. No need for mainForm.submit() if the button type is correct.
             }
         });
         
+        // Initial UI setup
         updateUI();
     });
 </script>
