@@ -47,18 +47,18 @@
             min-height: 100vh;
         }
         
-        /* THE KEY FIX FOR HEIGHT & WIDTH */
+        /* === THE DEFINITIVE LAYOUT FIX === */
         .main-content {
-            display: flex;
-            flex-grow: 1;
-            padding: 20px 40px;
+            display: grid; /* Switched to CSS Grid */
+            grid-template-columns: 18.6% 1fr; /* Explicitly sets column widths */
+            align-items: start; /* Aligns items to the top, fixing height */
             gap: 25px;
-            /* This aligns children to the top and stops them from stretching vertically. */
-            align-items: flex-start; 
+            width: 100%;
+            padding: 20px 40px;
         }
 
         .sidebar-nav {
-            flex: 0 0 18.6%;
+            /* flex property is no longer needed as grid controls it */
             background-color: var(--sidebar-bg);
             border-radius: 15px;
             padding: 20px 10px;
@@ -104,11 +104,10 @@
             color: var(--white) !important;
         }
 
-        /* This allows the form to grow to full width. Its height is controlled by the parent. */
         .form-pane {
-            flex-grow: 1;
+            /* flex-grow is no longer needed */
             background-color: var(--form-bg);
-            border: 1px solid var(--gray); /* Fixed undefined variable */
+            border: 1px solid var(--gray);
             border-radius: 15px;
             box-shadow: 0 0 3px 0 #7070706b;
             display: flex;
@@ -207,7 +206,6 @@
              cursor: pointer;
         }
 
-        /* This provides the correct spacing for the button now that the layout is stable. */
         .submit-button-container {
             text-align: center;
             padding: 40px 0 35px 0;
@@ -223,19 +221,18 @@
             cursor: pointer;
         }
 
-        /* This adds space between header and progress bar. */
         .progress-bar-wrapper {
             padding: 35px 10% 0; 
         }
         .progress-outer {
-            background-color: #cbd5e0; /* Fixed color */
+            background-color: #cbd5e0;
             border-radius: 100px;
             height: 25px;
             width: 100%;
             overflow: hidden;
         }
         .progress-inner {
-            background: #4CBB17; /* Fixed color */
+            background: #4CBB17;
             height: 100%;
             width: 0%;
             color: white;
@@ -252,13 +249,13 @@
                 flex-direction: column;
             }
             .main-content {
+                display: flex; /* Revert to flex for simple stacking */
                 flex-direction: column;
             }
             .sidebar-nav {
                 flex-direction: row;
                 flex-wrap: wrap;
                 width: 100%;
-                align-self: initial;
             }
             .form-grid, .form-grid.two-col {
                 grid-template-columns: 1fr;
