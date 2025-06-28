@@ -116,7 +116,9 @@
             display: flex;
             flex-direction: column;
             flex-grow: 0;
-        }
+            height: auto !important;
+            max-height: fit-content !important;
+}
         
         .form-pane-header {
             background-color: var(--dark-green-active);
@@ -141,7 +143,8 @@
             display: none;
         }
         .form-container.active {
-            display: block;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
         }
 
         .form-grid {
@@ -207,7 +210,7 @@
 
         .submit-button-container {
             text-align: center;
-            padding: 40px 0 35px 0;
+            padding: 40px 0 35px 0 !important;
         }
         .submit-button {
             background: var(--kelly-green);
