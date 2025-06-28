@@ -15,7 +15,8 @@
             --kelly-green: #4CBB17;
             --dark-green-active: #006511;
             --sidebar-bg: #313a4a;
-            --gold-text: #d4b800; /* ADDED */
+            --sidebar-text: #d4b800; 
+            --gold-text: #d4b800;
             --main-bg: #F4F4F6;
             --form-bg: #ffffff;
             --input-bg: #e8f4ff;
@@ -67,7 +68,7 @@
 
         .sidebar-nav .nav-button {
             background-color: transparent;
-            color: var(--gold-text); /* CHANGED */
+            color: var(--gold-text);
             text-decoration: none;
             padding: 15px 10px;
             border: 2px solid transparent;
@@ -84,7 +85,7 @@
         }
 
         .sidebar-nav .nav-button .button-icon {
-            color: var(--gold-text); /* CHANGED */
+            color: var(--gold-text);
             margin-right: 15px;
             width: 20px;
             text-align: center;
@@ -127,13 +128,12 @@
             font-weight: 500;
         }
         
-        /* FIXED: Added padding-bottom to create the 150px space after the button */
         #multi-step-form {
-            padding-bottom: 150px;
+            padding: 0 30px; /* Padding for the sides of the form */
         }
 
         .form-content-wrapper {
-             padding: 20px 30px;
+             padding-top: 20px;
         }
         
         .form-container {
@@ -216,6 +216,7 @@
         .submit-button-container {
             text-align: center;
             padding-top: 40px; 
+            padding-bottom: 40px; /* This plus the form padding creates the space */
         }
         .submit-button {
             background: var(--kelly-green);
