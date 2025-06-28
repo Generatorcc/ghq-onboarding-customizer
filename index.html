@@ -130,7 +130,11 @@
         }
         
         #multi-step-form {
-            padding: 0 30px; /* Padding for the sides of the form */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* This makes the form take up all available vertical space */
+    padding: 0 30px;
+}
         }
 
         .form-content-wrapper {
