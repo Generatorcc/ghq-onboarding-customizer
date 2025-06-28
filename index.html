@@ -14,9 +14,8 @@
         :root {
             --kelly-green: #4CBB17;
             --dark-green-active: #006511;
-            --sidebar-bg: #313a4a;
-            --sidebar-text: #d4b800; 
-            --gold-text: #d4b800;
+            --sidebar-bg: #000000;
+            --gold-text: #d4b800; 
             --main-bg: #F4F4F6;
             --form-bg: #ffffff;
             --input-bg: #e8f4ff;
@@ -57,7 +56,7 @@
 
         .sidebar-nav {
             flex: 0 0 18.6%;
-            background-color: black;
+            background-color: var(--sidebar-bg);
             border-radius: 15px;
             padding: 20px 10px;
             display: flex;
@@ -113,6 +112,12 @@
             flex-direction: column;
         }
         
+        #multi-step-form {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
         .form-pane-header {
             background-color: var(--dark-green-active);
             color: var(--white);
@@ -128,16 +133,9 @@
             font-weight: 500;
         }
         
-        #multi-step-form {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 0; /* This makes the form take up all available vertical space */
-    padding: 0 30px;
-}
-        }
-
         .form-content-wrapper {
-             padding-top: 20px;
+             padding: 20px 30px;
+             flex-grow: 1;
         }
         
         .form-container {
@@ -177,16 +175,7 @@
             margin-bottom: 5px;
         }
 
-        .form-field input[type="text"],
-        .form-field input[type="email"],
-        .form-field input[type="url"],
-        .form-field input[type="tel"],
-        .form-field input[type="date"],
-        .form-field input[type="number"],
-        .form-field select,
-        .form-field textarea,
-        .form-field .color-picker,
-        .form-field .file-upload {
+        .form-field input, .form-field select, .form-field textarea, .form-field .color-picker, .form-field .file-upload {
             background-color: var(--input-bg) !important;
             color: var(--input-text) !important;
             border: 0px solid #ACACACFF !important;
@@ -218,11 +207,9 @@
         }
 
         .submit-button-container {
-    text-align: center;
-    padding-top: 40px; 
-    padding-bottom: 40px;
-    margin-top: auto; /* THIS IS THE MAGIC LINE */
-      }
+            text-align: center;
+            margin-top: auto;
+            padding: 40px 0;
         }
         .submit-button {
             background: var(--kelly-green);
@@ -234,7 +221,7 @@
             font-weight: 600;
             cursor: pointer;
         }
-        
+
         .progress-bar-wrapper {
             padding: 15px 10% 0; 
         }
@@ -353,7 +340,7 @@
 
                         <!-- Step 3: Branding -->
                         <div id="form-step-3" class="form-container">
-                           <div class="form-grid">
+                           <div class="form-grid three-col">
                                 <div class="form-field"><label for="brand_color_main">Primary Color</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#006511"></div>
                                 <div class="form-field"><label for="brand_color_cta">Secondary Color</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
                                 <div class="form-field"><label for="brand_color_tertiary">Tertiary Color</label><input type="color" id="brand_color_tertiary" name="brand_color_tertiary" class="color-picker" value="#D9D9D9"></div>
@@ -467,7 +454,7 @@
         
         const stepTitles = [
             "Step 1: Business Info", "Step 2: Personal Info", "Step 3: Branding",
-            "Step 4: Social Media", "Step 5: Testimonials", "Step 6: Experience", "Step 7: Personal Calendar Setup"
+            "Step 4: Social Media", "Step 5: Testimonials", "Step 6: Experience", "Step 7: Calendar Setup"
         ];
 
         let currentStep = 1;
