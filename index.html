@@ -15,7 +15,7 @@
             --kelly-green: #4CBB17;
             --dark-green-active: #006511;
             --sidebar-bg: #313a4a;
-            --sidebar-text: #c6c6c6;
+            --gold-text: #d4b800; /* ADDED */
             --main-bg: #F4F4F6;
             --form-bg: #ffffff;
             --input-bg: #e8f4ff;
@@ -67,7 +67,7 @@
 
         .sidebar-nav .nav-button {
             background-color: transparent;
-            color: var(--sidebar-text);
+            color: var(--gold-text); /* CHANGED */
             text-decoration: none;
             padding: 15px 10px;
             border: 2px solid transparent;
@@ -84,17 +84,20 @@
         }
 
         .sidebar-nav .nav-button .button-icon {
+            color: var(--gold-text); /* CHANGED */
             margin-right: 15px;
             width: 20px;
             text-align: center;
         }
         
-        .sidebar-nav .nav-button:hover {
+        .sidebar-nav .nav-button:hover,
+        .sidebar-nav .nav-button:hover .button-icon {
             background: var(--kelly-green) !important;
             color: var(--white) !important;
         }
 
-        .sidebar-nav .nav-button.active {
+        .sidebar-nav .nav-button.active,
+        .sidebar-nav .nav-button.active .button-icon {
             background: var(--dark-green-active) !important;
             color: var(--white) !important;
         }
@@ -107,7 +110,6 @@
             box-shadow: 0 0 3px 0 #7070706b;
             display: flex;
             flex-direction: column;
-            min-height: 950px; 
         }
         
         .form-pane-header {
@@ -125,15 +127,13 @@
             font-weight: 500;
         }
         
-        .form-and-button-wrapper {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            padding: 0 30px;
+        /* FIXED: Added padding-bottom to create the 150px space after the button */
+        #multi-step-form {
+            padding-bottom: 150px;
         }
 
         .form-content-wrapper {
-             flex-grow: 1;
+             padding: 20px 30px;
         }
         
         .form-container {
@@ -215,8 +215,7 @@
 
         .submit-button-container {
             text-align: center;
-            padding: 20px 0;
-            margin-top: auto; 
+            padding-top: 40px; 
         }
         .submit-button {
             background: var(--kelly-green);
@@ -297,7 +296,7 @@
                     </div>
                 </div>
 
-                <form id="multi-step-form" action="YOUR_GHL_FORM_ENDPOINT_URL" method="POST" class="form-and-button-wrapper">
+                <form id="multi-step-form" action="YOUR_GHL_FORM_ENDPOINT_URL" method="POST">
                     <div class="form-content-wrapper">
                         <!-- Step 1: Business Info -->
                         <div id="form-step-1" class="form-container active">
