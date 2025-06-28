@@ -47,11 +47,13 @@
             min-height: 100vh;
         }
         
+        /* FIX: This rule now controls the vertical alignment, solving the height problem at its source. */
         .main-content {
             display: flex;
             flex-grow: 1;
             padding: 20px 40px;
             gap: 25px;
+            align-items: flex-start; /* This is the key fix for the height. */
         }
 
         .sidebar-nav {
@@ -102,9 +104,9 @@
             color: var(--white) !important;
         }
 
-        /* FIX: This rule stops the white box from stretching down the page */
+        /* FIX: This allows the form to grow horizontally but not vertically (due to the parent rule). */
         .form-pane {
-            flex-grow: 0;
+            flex-grow: 1;
             background-color: var(--form-bg);
             border: 1px solid var(--gray);
             border-radius: 15px;
@@ -113,7 +115,7 @@
             flex-direction: column;
         }
         
-        /* FIX: This rule is now clean and has its closing brace */
+        /* FIX: This rule is clean and correct. */
         #multi-step-form {
             display: flex;
             flex-direction: column;
@@ -206,7 +208,7 @@
              cursor: pointer;
         }
 
-        /* FIX: This rule correctly positions the button with the right spacing */
+        /* FIX: This rule provides the correct spacing for the button. */
         .submit-button-container {
             text-align: center;
             padding: 40px 0 35px 0;
@@ -222,7 +224,7 @@
             cursor: pointer;
         }
 
-        /* FIX: This adds the correct space between header and progress bar */
+        /* FIX: This adds the correct space between header and progress bar. */
         .progress-bar-wrapper {
             padding: 35px 10% 0; 
         }
