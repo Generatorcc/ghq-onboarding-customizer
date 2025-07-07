@@ -359,55 +359,63 @@
                                     </select>
                                 </div>
                                 <h4 class="full-width">Location Settings</h4>
-                                <div class="form-field">
+                               <div class="form-field">
                                     <label for="location_timezone">Time Zone</label>
                                     <select id="location_timezone" name="location_timezone">
                                         <option value="" disabled selected>Select a time zone</option>
                                         <optgroup label="USA & Territories">
-                                            <option value="USA - Hawaii Time">USA - Hawaii Time</option>
-                                            <option value="USA - Alaska Time">USA - Alaska Time</option>
-                                            <option value="USA - Pacific Time">USA - Pacific Time</option>
-                                            <option value="USA - Mountain Time">USA - Mountain Time</option>
-                                            <option value="USA - Central Time">USA - Central Time</option>
-                                            <option value="USA - Eastern Time">USA - Eastern Time</option>
-                                            <option value="USA - American Samoa">USA - American Samoa</option>
-                                            <option value="USA - Guam">USA - Guam</option>
-                                            <option value="USA - Puerto Rico">USA - Puerto Rico</option>
+                                            <option value="Pacific/Honolulu">(GMT-10:00) USA - Hawaii</option>
+                                            <option value="America/Anchorage">(GMT-09:00) USA - Alaska</option>
+                                            <option value="America/Los_Angeles">(GMT-08:00) USA - Pacific Time</option>
+                                            <option value="America/Denver">(GMT-07:00) USA - Mountain Time</option>
+                                            <option value="America/Chicago">(GMT-06:00) USA - Central Time</option>
+                                            <option value="America/New_York">(GMT-05:00) USA - Eastern Time</option>
+                                            <option value="Pacific/Pago_Pago">(GMT-11:00) USA - American Samoa</option>
+                                            <option value="Pacific/Guam">(GMT+10:00) USA - Guam</option>
+                                            <option value="America/Puerto_Rico">(GMT-04:00) USA - Puerto Rico</option>
                                         </optgroup>
                                         <optgroup label="Canada">
-                                            <option value="Canada - Pacific Time">Canada - Pacific Time</option>
-                                            <option value="Canada - Mountain Time">Canada - Mountain Time</option>
-                                            <option value="Canada - Central Time">Canada - Central Time</option>
-                                            <option value="Canada - Eastern Time">Canada - Eastern Time</option>
-                                            <option value="Canada - Atlantic Time">Canada - Atlantic Time</option>
-                                            <option value="Canada - Newfoundland Time">Canada - Newfoundland Time</option>
+                                            <option value="America/Vancouver">(GMT-08:00) Canada - Pacific Time</option>
+                                            <option value="America/Edmonton">(GMT-07:00) Canada - Mountain Time</option>
+                                            <option value="America/Winnipeg">(GMT-06:00) Canada - Central Time</option>
+                                            <option value="America/Toronto">(GMT-05:00) Canada - Eastern Time</option>
+                                            <option value="America/Halifax">(GMT-04:00) Canada - Atlantic Time</option>
+                                            <option value="America/St_Johns">(GMT-03:30) Canada - Newfoundland Time</option>
                                         </optgroup>
                                         <optgroup label="Europe">
-                                            <option value="United Kingdom Time">United Kingdom Time</option>
-                                            <option value="Ireland Time">Ireland Time</option>
-                                            <option value="Germany, Austria, Switzerland Time">Germany, Austria, Switzerland Time</option>
-                                            <option value="France, Belgium, Netherlands Time">France, Belgium, Netherlands Time</option>
-                                            <option value="Spain Time">Spain Time</option>
-                                            <option value="Sweden, Norway, Denmark Time">Sweden, Norway, Denmark Time</option>
-                                            <option value="Finland Time">Finland Time</option>
+                                            <option value="Europe/London">(GMT+00:00) United Kingdom</option>
+                                            <option value="Europe/Dublin">(GMT+00:00) Ireland</option>
+                                            <option value="Europe/Berlin">(GMT+01:00) Germany</option>
+                                            <option value="Europe/Paris">(GMT+01:00) France</option>
+                                            <option value="Europe/Madrid">(GMT+01:00) Spain</option>
+                                            <option value="Europe/Amsterdam">(GMT+01:00) Netherlands</option>
+                                            <option value="Europe/Brussels">(GMT+01:00) Belgium</option>
+                                            <option value="Europe/Zurich">(GMT+01:00) Switzerland</option>
+                                            <option value="Europe/Stockholm">(GMT+01:00) Sweden</option>
+                                            <option value="Europe/Oslo">(GMT+01:00) Norway</option>
+                                            <option value="Europe/Copenhagen">(GMT+01:00) Denmark</option>
+                                            <option value="Europe/Helsinki">(GMT+02:00) Finland</option>
                                         </optgroup>
                                         <optgroup label="Australia & New Zealand">
-                                            <option value="Australia - Perth Time">Australia - Perth Time</option>
-                                            <option value="Australia - Darwin Time">Australia - Darwin Time</option>
-                                            <option value="Australia - Adelaide Time">Australia - Adelaide Time</option>
-                                            <option value="Australia - Sydney, Melbourne, Brisbane Time">Australia - Sydney, Melbourne, Brisbane Time</option>
-                                            <option value="New Zealand Time">New Zealand Time</option>
+                                            <option value="Australia/Perth">(GMT+08:00) Australia - Perth</option>
+                                            <option value="Australia/Darwin">(GMT+09:30) Australia - Darwin</option>
+                                            <option value="Australia/Adelaide">(GMT+09:30) Australia - Adelaide</option>
+                                            <option value="Australia/Sydney">(GMT+10:00) Australia - Sydney, Melbourne</option>
+                                            <option value="Australia/Brisbane">(GMT+10:00) Australia - Brisbane</option>
+                                            <option value="Pacific/Auckland">(GMT+12:00) New Zealand</option>
                                         </optgroup>
-                                        <optgroup label="Other">
-                                            <option value="South Africa Time">South Africa Time</option>
-                                            <option value="Singapore, Hong Kong, Malaysia Time">Singapore, Hong Kong, Malaysia Time</option>
-                                            <option value="United Arab Emirates Time">United Arab Emirates Time</option>
-                                            <option value="Mexico City Time">Mexico City Time</option>
-                                            <option value="Brazil - Sao Paulo Time">Brazil - Sao Paulo Time</option>
-                                            <option value="India Time">India Time</option>
-                                            <option value="Philippines Time">Philippines Time</option>
-                                            <option value="Belize Time">Belize Time</option>
-                                            <option value="Israel Time">Israel Time</option>
+                                        <optgroup label="Other Countries">
+                                            <option value="Africa/Johannesburg">(GMT+02:00) South Africa</option>
+                                            <option value="Asia/Singapore">(GMT+08:00) Singapore</option>
+                                            <option value="Asia/Dubai">(GMT+04:00) United Arab Emirates</option>
+                                            <option value="America/Mexico_City">(GMT-06:00) Mexico</option>
+                                            <option value="America/Sao_Paulo">(GMT-03:00) Brazil</option>
+                                            <option value="Asia/Kolkata">(GMT+05:30) India</option>
+                                            <option value="Asia/Manila">(GMT+08:00) Philippines</option>
+                                            <option value="Asia/Kuala_Lumpur">(GMT+08:00) Malaysia</option>
+                                            <option value="Asia/Hong_Kong">(GMT+08:00) Hong Kong</option>
+                                            <option value="America/Belize">(GMT-06:00) Belize</option>
+                                            <option value="Asia/Jerusalem">(GMT+02:00) Israel</option>
                                         </optgroup>
                                     </select>
                                 </div>
