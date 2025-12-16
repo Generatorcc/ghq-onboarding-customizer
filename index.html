@@ -704,68 +704,62 @@
         let currentStep = 1;
 
         function updateUI() {
-            navButtons.forEach(btn => {
-                btn.classList.toggle('active', parseInt(btn.dataset.step) === currentStep);
-            });
+    navButtons.forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.step) === currentStep);
+    });
 
-            formContainers.forEach(form => {
-                form.classList.toggle('active', parseInt(form.id.split('-')[2]) === currentStep);
-            });
-            
-            formTitle.textContent = stepTitles[currentStep - 1];
-            const progressPercentage = (currentStep / totalSteps) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
-            progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
+    formContainers.forEach(form => {
+        form.classList.toggle(
+            'active',
+            parseInt(form.id.split('-')[2]) === currentStep
+        );
+    });
 
-            if (currentStep === totalSteps) {
-                saveAndContinueBtn.textContent = 'Submit Onboarding';
-                saveAndContinueBtn.type = 'submit';
-            } else {
-                saveAndContinueBtn.textContent = 'Save & Continue';
-                saveAndContinueBtn.type = 'button';
-            }
-        }    
+    formTitle.textContent = stepTitles[currentStep - 1];
 
-        function goToStep(stepNumber) {
-            if (stepNumber < 1 || stepNumber > totalSteps) return;
-            currentStep = stepNumber;
-            updateUI();
-        }
+    const progressPercentage = (currentStep / totalSteps) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+    progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
-        navButtons.forEach(button => {
-            button.addEventListener('click', function (e) {
-                e.preventDefault();
-                goToStep(parseInt(this.dataset.step));
-            });
-        });
-        
-        saveAndContinueBtn.addEventListener('click', function (e) {
-            // always stop default button behavior
-            e.preventDefault();
-        
-            if (currentStep < totalSteps) {
-                goToStep(currentStep + 1);
-                return;
-            }
-        
-            // LAST STEP ONLY
-            saveAndContinueBtn.disabled = true;
-        
-            // submit form normally
-            mainForm.submit();
-        
-            // show message AFTER submit is triggered
-            setTimeout(() => {
-                alert(
-                    'Onboarding submitted successfully. ' +
-                    'Within 24 hours your setup will be completed. ' +
-                    'Please log out and log back into GHQ once notified.'
-                );
-            }, 300);
-        });
+    if (currentStep === totalSteps) {
+        saveAndContinueBtn.textContent = 'Submit Onboarding';
+        saveAndContinueBtn.type = 'submit';
+    } else {
+        saveAndContinueBtn.textContent = 'Save & Continue';
+        saveAndContinueBtn.type = 'button';
+    }
+}
+
+function goToStep(stepNumber) {
+    if (stepNumber < 1 || stepNumber > totalSteps) return;
+    currentStep = stepNumber;
+    updateUI();
+}
+
+// sidebar navigation
+navButtons.forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        goToStep(parseInt(this.dataset.step));
+    });
+});
+
+// main button logic
+saveAndContinueBtn.addEventListener('click', function (e) {
+
+    // NOT last step → move forward
+    if (currentStep < totalSteps) {
+        e.preventDefault();
+        goToStep(currentStep + 1);
+        return;
+    }
+
+    // LAST step → let the browser submit the form
+    // DO NOT preventDefault here
+    saveAndContinueBtn.disabled = true;
+});
 
 updateUI();
-
 
 </script>
 
