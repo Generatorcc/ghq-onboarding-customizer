@@ -748,22 +748,18 @@
     }
 
     // LAST STEP ONLY
-    saveAndContinueBtn.disabled = true;
+   saveAndContinueBtn.disabled = true;
 
+    // show message BEFORE submit
+    alert(
+        'Onboarding submitted successfully. ' +
+        'Within 24 hours your setup will be completed. ' +
+        'Please log out and log back into GHQ once notified.'
+    );
+    
     // submit form
     mainForm.submit();
 
-    // show message AFTER submit fires
-    setTimeout(function () {
-        alert(
-            'Onboarding submitted successfully. ' +
-            'Within 24 hours your setup will be completed. ' +
-            'Please log out and log back into GHQ once notified.'
-        );
-    }, 300);
-});
-        
-        updateUI();
     });
 
 </script>
