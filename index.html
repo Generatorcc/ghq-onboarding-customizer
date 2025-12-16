@@ -275,6 +275,35 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* DRAG & DROP UPLOADS */
+        .drag-zone {
+            border: 2px dashed #cbd5e0;
+            background: #f9f9f9;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drag-zone.dragover {
+            background: #e6f5e3;
+            border-color: #4CBB17;
+        }
+        .drag-zone .dz-text {
+            font-size: 14px;
+            color: #555;
+        }
+        .drag-zone .dz-filename {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #006511;
+            font-weight: 500;
+        }
+        .drag-zone input[type="file"] {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -449,6 +478,11 @@
                                     <label for="profile_pic">Profile Picture</label>
                                     <span class="helper-text">(Suggested: 200px by 200px)</span>
                                     <input type="file" id="profile_pic" name="profile_pic" class="file-upload">
+                                    <div class="drag-zone">
+                                        <div class="dz-text">Click or drag a file here</div>
+                                        <div class="dz-filename"></div>
+                                        <input type="file" id="profile_pic" name="profile_pic">
+                                    </div>
                                 </div>
                                 <h4 class="full-width">Physical Address</h4>
                                 <div class="form-field full-width"><label for="contact_address1">Street Address</label><input type="text" id="contact_address1" name="contact.address1" placeholder="456 Personal Ave"></div>
@@ -504,6 +538,11 @@
 
                         <!-- Step 3: Branding -->
                         <div id="form-step-3" class="form-container">
+                            <div class="form-field full-width" style="text-align: center;">
+                                <p style="margin: 0 auto 25px; max-width: 700px; font-size: 14px; color: #2c3345;">
+                                    This is where you set your brand colors for your website, funnels, forms, surveys, and email. You may request your skin be updated to your brand-specific colors for a one-time fee of $50. Many clients love this feature for consistent brand alignment across everything.
+                                </p>
+                            </div>
                            <div class="form-grid three-col">
                                 <div class="form-field"><label for="brand_color_main">Primary Color</label><input type="color" id="brand_color_main" name="brand_color_main" class="color-picker" value="#006511"></div>
                                 <div class="form-field"><label for="brand_color_cta">Secondary Color</label><input type="color" id="brand_color_cta" name="brand_color_cta" class="color-picker" value="#4CBB17"></div>
@@ -511,21 +550,37 @@
                                 <div class="form-field full-width">
                                     <label for="logo_primary">Primary Logo (Rectangular)</label>
                                     <span class="helper-text">(e.g., 400px by 100px)</span>
-                                    <input type="file" id="logo_primary" name="logo_primary" class="file-upload">
+                                    <div class="drag-zone">
+                                        <div class="dz-text">Click or drag a file here</div>
+                                        <div class="dz-filename"></div>
+                                        <input type="file" id="logo_primary" name="logo_primary">
+                                    </div>
                                 </div>
                                 <div class="form-field full-width">
                                     <label for="logo_secondary">Secondary Logo (Square/Icon)</label>
                                     <span class="helper-text">(e.g., 200px by 200px)</span>
-                                    <input type="file" id="logo_secondary" name="logo_secondary" class="file-upload">
+                                    <div class="drag-zone">
+                                        <div class="dz-text">Click or drag a file here</div>
+                                        <div class="dz-filename"></div>
+                                        <input type="file" id="logo_secondary" name="logo_secondary">
+                                    </div>
                                 </div>
-                                <div class="form-field full-width">
+                          <div class="form-field full-width">
                                     <label for="favicon">Favicon</label>
                                     <span class="helper-text">(e.g., 32px by 32px, .ico or .png)</span>
-                                    <input type="file" id="favicon" name="favicon" class="file-upload">
+                                    <div class="drag-zone">
+                                        <div class="dz-text">Click or drag a file here</div>
+                                        <div class="dz-filename"></div>
+                                        <input type="file" id="favicon" name="favicon">
+                                    </div>                                    
                                 </div>
                                 <div class="form-field full-width">
                                     <label for="media_upload">Upload General Media (Images, PDFs, etc.)</label>
-                                    <input type="file" id="media_upload" name="media_upload[]" class="file-upload" multiple>
+                                        <div class="drag-zone">
+                                        <div class="dz-text">Click or drag files here</div>
+                                        <div class="dz-filename"></div>
+                                    <input type="file" id="media_upload" name="media_upload[]" multiple>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -544,14 +599,23 @@
 
                         <!-- Step 5: Testimonials -->
                         <div id="form-step-5" class="form-container">
+                            <div class="form-field full-width" style="text-align: center;">
+                                <p style="margin: 0 auto 25px; max-width: 700px; font-size: 14px; color: #2c3345;">
+                                    This is for your testimonials. Others’ experience is far stronger than your assurance. You can and should have as many as possible, but let’s get you started with three of your best.
+                                </p>
+                         </div>
                             <h4>Testimonial 1</h4>
                             <div class="form-grid two-col">
                                 <div class="form-field"><label for="testimonial_1_name">Client Name</label><input type="text" id="testimonial_1_name" name="testimonial_1_name" placeholder="Jane Smith"></div>
                                 <div class="form-field">
                                     <label for="testimonial_1_pic">Client Picture</label>
                                     <span class="helper-text">(e.g., 200px by 200px)</span>
-                                    <input type="file" id="testimonial_1_pic" name="testimonial_1_pic" class="file-upload">
+                                    <div class="drag-zone">
+                                    <div class="dz-text">Click or drag a file here</div>
+                                    <div class="dz-filename"></div>
+                                    <input type="file" id="testimonial_1_pic" name="testimonial_1_pic">
                                 </div>
+                            </div>
                                 <div class="form-field full-width"><label for="testimonial_1_statement">Statement</label><textarea id="testimonial_1_statement" name="testimonial_1_statement" placeholder="This company is fantastic!"></textarea></div>
                             </div>
                             <hr>
@@ -561,8 +625,12 @@
                                 <div class="form-field">
                                     <label for="testimonial_2_pic">Client Picture</label>
                                     <span class="helper-text">(e.g., 200px by 200px)</span>
-                                    <input type="file" id="testimonial_2_pic" name="testimonial_2_pic" class="file-upload">
+                                    <div class="drag-zone">
+                                    <div class="dz-text">Click or drag a file here</div>
+                                    <div class="dz-filename"></div>
+                                    <input type="file" id="testimonial_2_pic" name="testimonial_2_pic">
                                 </div>
+                             </div>
                                 <div class="form-field full-width"><label for="testimonial_2_statement">Statement</label><textarea id="testimonial_2_statement" name="testimonial_2_statement" placeholder="I couldn't be happier with the results."></textarea></div>
                             </div>
                             <hr>
@@ -572,8 +640,12 @@
                                 <div class="form-field">
                                     <label for="testimonial_3_pic">Client Picture</label>
                                     <span class="helper-text">(e.g., 200px by 200px)</span>
-                                    <input type="file" id="testimonial_3_pic" name="testimonial_3_pic" class="file-upload">
+                                    <div class="drag-zone">
+                                    <div class="dz-text">Click or drag a file here</div>
+                                    <div class="dz-filename"></div>
+                                    <input type="file" id="testimonial_3_pic" name="testimonial_3_pic">
                                 </div>
+                            </div>
                                 <div class="form-field full-width"><label for="testimonial_3_statement">Statement</label><textarea id="testimonial_3_statement" name="testimonial_3_statement" placeholder="Five stars! Highly recommend."></textarea></div>
                             </div>
                         </div>
@@ -595,12 +667,11 @@
                                 <h4 class="full-width">Calendar Setup</h4>
                                 <div class="form-field full-width">
                                     <label for="calendar_integration">Your Personal Calendar Booking Link</label>
-                                    <input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here">
+                                    <input type="url" id="calendar_integration" name="calendar_integration" placeholder="Paste your Calendly, Acuity, or other scheduling link here (Skip if using GHQ calendar)">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <div class="submit-button-container">
                          <button type="button" class="submit-button" id="save-and-continue-btn">Save & Continue</button>
                     </div>
@@ -661,7 +732,7 @@
             if (currentStep < totalSteps) {
                 goToStep(currentStep + 1);
             } else {
-                alert('Onboarding Complete! Submitting your information.');
+                alert('Onboarding Complete! Submitting your information. You can close this and retun to the onboarding list or launchpad');
                 // For a real submission, you would have an endpoint URL in the form's action attribute.
                 // The line below would then submit the form data to GHL.
                 // mainForm.submit(); 
