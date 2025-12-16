@@ -710,36 +710,27 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentStep = 1;
 
     function updateUI() {
-        // sidebar active state
         navButtons.forEach(btn => {
-            btn.classList.toggle(
+            btn.classList.toggle('active', Number(btn.dataset.step) === currentStep);
+        });
+
+        formContainers.forEach(container => {
+            container.classList.toggle(
                 'active',
-                parseInt(btn.dataset.step, 10) === currentStep
+                Number(container.id.split('-')[2]) === currentStep
             );
         });
 
-        // show correct form step
-        formContainers.forEach(container => {
-            const stepNum = parseInt(container.id.split('-')[2], 10);
-            container.classList.toggle('active', stepNum === currentStep);
-        });
-
-        // title
         formTitle.textContent = stepTitles[currentStep - 1];
 
-        // progress bar
-        const progressPercent = (currentStep / totalSteps) * 100;
-        progressBar.style.width = progressPercent + '%';
-        progressBar.textContent = Math.round(progressPercent) + '% Complete';
+        const progress = (currentStep / totalSteps) * 100;
+        progressBar.style.width = progress + '%';
+        progressBar.textContent = Math.round(progress) + '% Complete';
 
-        // button behavior
         if (currentStep === totalSteps) {
             saveAndContinueBtn.textContent = 'Submit Onboarding';
-            saveAndContinueBtn.type = 'submit';
         } else {
             saveAndContinueBtn.textContent = 'Save & Continue';
-            saveAndContinueBtn.type = 'button';
-            saveAndContinueBtn.disabled = false;
         }
     }
 
@@ -750,26 +741,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Sidebar navigation
-    navButtons.forEach(button => {
-        button.addEventListener('click', function (e) {
+    navButtons.forEach(btn => {
+        btn.addEventListener('click', function (e) {
             e.preventDefault();
-            goToStep(parseInt(this.dataset.step, 10));
+            goToStep(Number(this.dataset.step));
         });
     });
 
-    // Main Save / Submit button
+    // Main button
     saveAndContinueBtn.addEventListener('click', function (e) {
+        e.preventDefault();
 
-        // Not final step → move forward only
         if (currentStep < totalSteps) {
-            e.preventDefault();
             goToStep(currentStep + 1);
             return;
         }
 
-        // Final step → allow normal browser submit
-        // DO NOT preventDefault
+        // LAST STEP → submit form
         saveAndContinueBtn.disabled = true;
+        mainForm.submit();
     });
 
     updateUI();
