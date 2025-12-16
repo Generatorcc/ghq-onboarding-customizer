@@ -717,8 +717,13 @@
             progressBar.style.width = `${progressPercentage}%`;
             progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
 
-            saveAndContinueBtn.textContent = (currentStep === totalSteps) ? 'Submit Onboarding' : 'Save & Continue';
-        }
+            if (currentStep === totalSteps) {
+                saveAndContinueBtn.textContent = 'Submit Onboarding';
+                saveAndContinueBtn.type = 'submit';
+            } else {
+                saveAndContinueBtn.textContent = 'Save & Continue';
+                saveAndContinueBtn.type = 'button';
+            }
 
         function goToStep(stepNumber) {
             if (stepNumber < 1 || stepNumber > totalSteps) return;
