@@ -686,82 +686,96 @@
     </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const navButtons = document.querySelectorAll('.nav-button');
-        const formContainers = document.querySelectorAll('.form-container');
-        const formTitle = document.getElementById('form-title');
-        const progressBar = document.getElementById('progress-bar');
-        const saveAndContinueBtn = document.getElementById('save-and-continue-btn');
-        const mainForm = document.getElementById('multi-step-form');
+document.addEventListener('DOMContentLoaded', function () {
 
-        const totalSteps = navButtons.length;
-        
-        const stepTitles = [
-            "Step 1: Business Info", "Step 2: Personal Info", "Step 3: Branding",
-            "Step 4: Social Media", "Step 5: Testimonials", "Step 6: Experience", "Step 7: Calendar Setup"
-        ];
+    const navButtons = document.querySelectorAll('.nav-button');
+    const formContainers = document.querySelectorAll('.form-container');
+    const formTitle = document.getElementById('form-title');
+    const progressBar = document.getElementById('progress-bar');
+    const saveAndContinueBtn = document.getElementById('save-and-continue-btn');
+    const mainForm = document.getElementById('multi-step-form');
 
-        let currentStep = 1;
+    const totalSteps = navButtons.length;
 
-        function updateUI() {
-    navButtons.forEach(btn => {
-        btn.classList.toggle('active', parseInt(btn.dataset.step) === currentStep);
-    });
+    const stepTitles = [
+        "Step 1: Business Info",
+        "Step 2: Personal Info",
+        "Step 3: Branding",
+        "Step 4: Social Media",
+        "Step 5: Testimonials",
+        "Step 6: Experience",
+        "Step 7: Calendar Setup"
+    ];
 
-    formContainers.forEach(form => {
-        form.classList.toggle(
-            'active',
-            parseInt(form.id.split('-')[2]) === currentStep
-        );
-    });
+    let currentStep = 1;
 
-    formTitle.textContent = stepTitles[currentStep - 1];
+    function updateUI() {
+        // sidebar active state
+        navButtons.forEach(btn => {
+            btn.classList.toggle(
+                'active',
+                parseInt(btn.dataset.step, 10) === currentStep
+            );
+        });
 
-    const progressPercentage = (currentStep / totalSteps) * 100;
-    progressBar.style.width = `${progressPercentage}%`;
-    progressBar.textContent = `${Math.round(progressPercentage)}% Complete`;
+        // show correct form step
+        formContainers.forEach(container => {
+            const stepNum = parseInt(container.id.split('-')[2], 10);
+            container.classList.toggle('active', stepNum === currentStep);
+        });
 
-    if (currentStep === totalSteps) {
-        saveAndContinueBtn.textContent = 'Submit Onboarding';
-        saveAndContinueBtn.type = 'submit';
-    } else {
-        saveAndContinueBtn.textContent = 'Save & Continue';
-        saveAndContinueBtn.type = 'button';
+        // title
+        formTitle.textContent = stepTitles[currentStep - 1];
+
+        // progress bar
+        const progressPercent = (currentStep / totalSteps) * 100;
+        progressBar.style.width = progressPercent + '%';
+        progressBar.textContent = Math.round(progressPercent) + '% Complete';
+
+        // button behavior
+        if (currentStep === totalSteps) {
+            saveAndContinueBtn.textContent = 'Submit Onboarding';
+            saveAndContinueBtn.type = 'submit';
+        } else {
+            saveAndContinueBtn.textContent = 'Save & Continue';
+            saveAndContinueBtn.type = 'button';
+            saveAndContinueBtn.disabled = false;
+        }
     }
-}
 
-function goToStep(stepNumber) {
-    if (stepNumber < 1 || stepNumber > totalSteps) return;
-    currentStep = stepNumber;
+    function goToStep(step) {
+        if (step < 1 || step > totalSteps) return;
+        currentStep = step;
+        updateUI();
+    }
+
+    // Sidebar navigation
+    navButtons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            goToStep(parseInt(this.dataset.step, 10));
+        });
+    });
+
+    // Main Save / Submit button
+    saveAndContinueBtn.addEventListener('click', function (e) {
+
+        // Not final step → move forward only
+        if (currentStep < totalSteps) {
+            e.preventDefault();
+            goToStep(currentStep + 1);
+            return;
+        }
+
+        // Final step → allow normal browser submit
+        // DO NOT preventDefault
+        saveAndContinueBtn.disabled = true;
+    });
+
     updateUI();
-}
-
-// sidebar navigation
-navButtons.forEach(button => {
-    button.addEventListener('click', function (e) {
-        e.preventDefault();
-        goToStep(parseInt(this.dataset.step));
-    });
 });
-
-// main button logic
-saveAndContinueBtn.addEventListener('click', function (e) {
-
-    // NOT last step → move forward
-    if (currentStep < totalSteps) {
-        e.preventDefault();
-        goToStep(currentStep + 1);
-        return;
-    }
-
-    // LAST step → let the browser submit the form
-    // DO NOT preventDefault here
-    saveAndContinueBtn.disabled = true;
-});
-
-updateUI();
-
 </script>
+
 
 </body>
 </html>
