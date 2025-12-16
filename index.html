@@ -724,6 +724,7 @@
                 saveAndContinueBtn.textContent = 'Save & Continue';
                 saveAndContinueBtn.type = 'button';
             }
+        }    
 
         function goToStep(stepNumber) {
             if (stepNumber < 1 || stepNumber > totalSteps) return;
@@ -738,16 +739,29 @@
             });
         });
 
-        saveAndContinueBtn.addEventListener('click', function () {
-            if (currentStep < totalSteps) {
-                goToStep(currentStep + 1);
-            } else {
-                alert('Onboarding Complete! Submitting your information. You can close this and retun to the onboarding list or launchpad');
-                // For a real submission, you would have an endpoint URL in the form's action attribute.
-                // The line below would then submit the form data to GHL.
-                // mainForm.submit(); 
-            }
-        });
+        saveAndContinueBtn.addEventListener('click', function (e) {
+        if (currentStep < totalSteps) {
+            e.preventDefault();
+            goToStep(currentStep + 1);
+        } else {
+            // last step: allow submit, then show message
+            e.preventDefault();
+
+            // prevent double submit
+            saveAndContinueBtn.disabled = true;
+    
+            mainForm.submit();
+    
+            setTimeout(() => {
+                alert(
+                    'Onboarding submitted successfully. ' +
+                    'Within 24 hours your setup will be completed. ' +
+                    'Please log out and log back into GHQ once notified.'
+                );
+            }, 300);
+        }
+    });
+
         
         updateUI();
     });
