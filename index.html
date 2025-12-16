@@ -738,26 +738,34 @@
                 goToStep(parseInt(this.dataset.step));
             });
         });
-
-       saveAndContinueBtn.addEventListener('click', function (e) {
+        
+        saveAndContinueBtn.addEventListener('click', function (e) {
+            // always stop default button behavior
             e.preventDefault();
         
             if (currentStep < totalSteps) {
                 goToStep(currentStep + 1);
-            } else {
-                saveAndContinueBtn.disabled = true;
-        
-                mainForm.submit();
-        
-                setTimeout(() => {
-                    alert(
-                        'Onboarding submitted successfully. ' +
-                        'Within 24 hours your setup will be completed. ' +
-                        'Please log out and log back into GHQ once notified.'
-                    );
-                }, 300);
+                return;
             }
+        
+            // LAST STEP ONLY
+            saveAndContinueBtn.disabled = true;
+        
+            // submit form normally
+            mainForm.submit();
+        
+            // show message AFTER submit is triggered
+            setTimeout(() => {
+                alert(
+                    'Onboarding submitted successfully. ' +
+                    'Within 24 hours your setup will be completed. ' +
+                    'Please log out and log back into GHQ once notified.'
+                );
+            }, 300);
         });
+
+updateUI();
+
 
 </script>
 
