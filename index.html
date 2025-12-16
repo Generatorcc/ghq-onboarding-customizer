@@ -739,27 +739,26 @@
             });
         });
 
-    saveAndContinueBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    if (currentStep < totalSteps) {
-        goToStep(currentStep + 1);
-        return;
-    }
-
-    // LAST STEP ONLY
-   saveAndContinueBtn.disabled = true;
-
-    // show message BEFORE submit
-    alert(
-        'Onboarding submitted successfully. ' +
-        'Within 24 hours your setup will be completed. ' +
-        'Please log out and log back into GHQ once notified.'
-    );
+       saveAndContinueBtn.addEventListener('click', function (e) {
+        if (currentStep < totalSteps) {
+            e.preventDefault();
+            goToStep(currentStep + 1);
+        } else {
+            // last step
+            e.preventDefault();
     
-    // submit form
-    mainForm.submit();
-
+            saveAndContinueBtn.disabled = true;
+    
+            mainForm.submit();
+    
+            setTimeout(function () {
+                alert(
+                    'Onboarding submitted successfully. ' +
+                    'Within 24 hours your setup will be completed. ' +
+                    'Please log out and log back into GHQ once notified.'
+                );
+            }, 300);
+        }
     });
 
 </script>
