@@ -765,7 +765,27 @@ document.addEventListener('DOMContentLoaded', function () {
     updateUI();
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const waitForForm = setInterval(() => {
+    const form = document.getElementById("multi-step-form");
+    if (!form) return;
 
+    // Stop checking once form exists
+    clearInterval(waitForForm);
+
+    // Prevent duplicate insert
+    if (form.querySelector('input[name="ghq_user_id"]')) return;
+
+    const hidden = document.createElement("input");
+    hidden.type = "hidden";
+    hidden.name = "ghq_user_id";
+    hidden.value = "";
+
+    form.appendChild(hidden);
+  }, 300);
+});
+</script>
 
 </body>
 </html>
