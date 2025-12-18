@@ -767,23 +767,27 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const ghqUserId = params.get("ghq_user_id");
+
+  if (!ghqUserId) return;
+
   const waitForForm = setInterval(() => {
     const form = document.getElementById("multi-step-form");
     if (!form) return;
 
-    // Stop checking once form exists
     clearInterval(waitForForm);
 
-    // Prevent duplicate insert
-    if (form.querySelector('input[name="ghq_user_id"]')) return;
+    let hidden = form.querySelector('input[name="ghq_user_id"]');
+    if (!hidden) {
+      hidden = document.createElement("input");
+      hidden.type = "hidden";
+      hidden.name = "ghq_user_id";
+      form.appendChild(hidden);
+    }
 
-    const hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.name = "ghq_user_id";
-    hidden.value = "";
-
-    form.appendChild(hidden);
-  }, 300);
+    hidden.value = ghqUserId;
+  }, 200);
 });
 </script>
 
