@@ -791,26 +791,47 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
+
+  /* ---------- FULL NAME → FIRST / LAST ---------- */
   const fullName = params.get("contact.name");
+  if (fullName) {
+    const parts = fullName.trim().split(/\s+/);
+    const firstName = parts.shift();
+    const lastName = parts.join(" ");
 
-  if (!fullName) return;
+    const firstInput = document.querySelector('[name="contact.first_name"]');
+    const lastInput  = document.querySelector('[name="contact.last_name"]');
 
-  const parts = fullName.trim().split(/\s+/);
-  if (!parts.length) return;
+    if (firstInput && !firstInput.value) firstInput.value = firstName;
+    if (lastInput && !lastInput.value) lastInput.value = lastName;
+  }
 
-  const firstName = parts.shift();
-  const lastName = parts.join(" ");
+  /* ---------- BUSINESS INFO (STEP 1 ONLY) ---------- */
+  const fieldMap = {
+    "contact.company_name": "contact.company_name",
+    "contact.email": "contact.email",
+    "business_address": "business_address",
+    "business_city": "business_city",
+    "business_state": "business_state",
+    "business_postal_code": "business_postal_code",
+    "business_country": "business_country"
+  };
 
-  const firstInput = document.querySelector('[name="contact.first_name"]');
-  const lastInput = document.querySelector('[name="contact.last_name"]');
+  Object.entries(fieldMap).forEach(([paramKey, fieldName]) => {
+    const value = params.get(paramKey);
+    if (!value) return;
 
-  if (firstInput && !firstInput.value) firstInput.value = firstName;
-  if (lastInput && !lastInput.value) lastInput.value = lastName;
+    const input = document.querySelector(`[name="${fieldName}"]`);
+    if (input && !input.value) {
+      input.value = value;
+    }
+  });
 });
 </script>
+
 
 </body>
 </html>
