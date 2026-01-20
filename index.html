@@ -791,5 +791,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const fullName = params.get("contact.name");
+
+  if (!fullName) return;
+
+  const parts = fullName.trim().split(/\s+/);
+  if (!parts.length) return;
+
+  const firstName = parts.shift();
+  const lastName = parts.join(" ");
+
+  const firstInput = document.querySelector('[name="contact.first_name"]');
+  const lastInput = document.querySelector('[name="contact.last_name"]');
+
+  if (firstInput && !firstInput.value) firstInput.value = firstName;
+  if (lastInput && !lastInput.value) lastInput.value = lastName;
+});
+</script>
+
 </body>
 </html>
